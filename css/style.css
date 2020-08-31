@@ -1,0 +1,143 @@
+@import url(//db.onlinewebfonts.com/c/903636bcb12ed898784fd56e2b3aecfb?family=FugueMono);
+@import "nord.css";
+
+/* ----- Globale Einstellungen ----- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--nord0);
+  background-color: var(--nord6);
+  font-family: FugueMono, sans-serif;
+}
+
+
+/* ----- Navbar ----- */
+nav {
+  display: flex;
+  align-items: center;
+  background-color: var(--nord4);
+  box-shadow: 10px 2px 10px white;
+}
+
+#logo-container {
+  margin-right: 29rem;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+.nav-link {
+  transition-duration: 0.1s;
+}
+
+.nav-link a {
+  display: block;
+  padding: 17px 1rem;
+  text-decoration: none;
+  color: var(--nord0);
+  font-size: 1.5rem;
+}
+
+.nav-link a:hover {
+  color: var(--nord10);
+  background-color: var(--nord5);
+}
+
+
+/* ----- Kopf für Projektesektion ----- */
+
+#Kopf-Projektsektion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--nord3);
+  margin-bottom: 3rem;
+}
+
+#Kopf-Text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 7rem 6rem;
+  color: var(--nord4);
+}
+
+#Kopf-Text h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+#Animation {
+  margin: 0 6rem;
+}
+
+
+/* ----- Projekt Sektion ----- */
+
+#Projekt-Sektion {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 80px;
+  margin: 80px;
+}
+
+
+/* ----- Projekt Karten ----- */
+
+.Projekt-Karte {
+  padding: 20px;
+  box-shadow: 2px 2px 20px black;
+  border: 2px solid var(--nord3);
+  background-color: var(--nord4);
+}
+
+.Projekt-Link {
+  height: 3rem;
+  width: 10rem;
+  font-family: FugueMono, sans-serif;
+  font-size: 1rem;
+  color: var(--nord6);
+  background-color: var(--nord3);
+  border: none;
+  border-radius: 0;
+  box-shadow: 1px 1px 4px black;
+}
+
+
+/* ----- Github Sektion ----- */
+
+#Github-Sektion {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: var(--nord3);
+}
+
+#Github-Sektion h1 {
+  margin: 3rem;
+  color: var(--nord6);
+}
+
+#Github-Sektion img {
+  width: 150px;
+  height: auto;
+}
+
+#Github-Link {
+  display: block;
+  height: 5rem;
+  width: 15rem;
+  color: var(--nord4);
+  background-color: var(--nord1);
+  text-decoration: none;
+  font-size: 1.7rem;
+  transition-duration: 0.1s;
+}
+
+#Github-Link:hover {
+  background-color: var(--nord2);
+}
