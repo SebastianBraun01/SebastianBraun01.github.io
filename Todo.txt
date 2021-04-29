@@ -1,10 +1,4 @@
-- Nord-Theme für meine Seite [*]
-- Logo für die Navleiste [*]
-- Navleiste fertig mit Hover-Animationen [*]
-- Dropdown für Projekte-Reiter [x]
-- Hauptsektion: Paragraph und Animaton nebeneinander [*]
-- Plotter- oder Oszilloskopanimation [*]
-- Herausstehende Projekt-Karten [*]
-- Github-Link-Sektion [*]
-- Schalter für dunkles und helles Design [ ]
-- Buttons in as umwandeln [ ]
+- template als Vorlage für Navleiste und Logo
+- eigene CSS Datei für jede Seite
+- gemeinsame CSS Datei für die Vorlage
+- eigene js Datei für jede Seite
