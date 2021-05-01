@@ -5,84 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/index.css">
-  <title>Home | Sebastian Braun</title>
+  <title>Sebastian_Braun.home();</title>
 </head>
 
 <body>
   <!-- Navbar mit Logo -->
-  <nav>
+  <header>
     <div id="logo-container">
-      <img src="img/logo_dunkel.png" height="65" alt="Logo" >
+      <img src="img/logo_hell.png" height="65" alt="Logo" >
     </div>
-    
-    <ul>
-      <li class="nav-link"><a href="index.html">Home</a></li>
-      <li class="nav-link"><a href="pages/übermich.html">Über mich</a></li>
-      <li class="nav-link"><a href="pages/template.html">Template</a></li>
-      <li class="nav-link"><a href="https://github.com/SebastianBraun01">Github</a></li>
-    </ul>
-  </nav>
 
+    <nav>
+      <ul>
+        <li class="nav-link"><a class="link-text" href="index.html">home();</a></li>
+        <li class="nav-link"><a class="link-text" href="pages/übermich.html">getInfo();</a></li>
+        <li class="nav-link"><a class="link-text" href="pages/template.html">template();</a></li>
+        <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01">github();</a></li>
+      </ul>
+    </nav>
+  </header>
+  
 
   <!-- Hauptseite -->
   <main>
-    <!-- Kopf für Projektsektion -->
-    <section id="Kopf-Projektsektion">
-      <div id="Kopf-Text">
-        <h1>Projekte</h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-      </div>
-
-      <div id="Animation">
-        <canvas id="canvas" width="800" height="400">
-          Coole Animation einer Sinuswelle!
-        </canvas>
-      </div>
-    </section>
-
-
-    <!-- Sektion für Projektkarten -->
-    <section id="Projekt-Sektion">
-      <div class="Projekt-Karte">
-        <h1>LED-Mesh-Netzwerk</h1>
-        <img src="img/projekt1.png" alt="Projekt 1">
-        <p>Raumbeleuchtung basierend auf den Neopixel-LEDS (WS2812B), die man gemütlich von seinem Smartphone aus bedienen kann. LED-Netzwerk kommuniziert über das Bluetooth Mesh Netzwerk von Particle. Das Netzwerk besteht aus mehreren einzelnen LED-Streifen, einer musikreaktiven LED-Wand und einer einem zentralen Access Point.</p>
-        <button class="Projekt-Link" onclick="redirectProjekt(1)">Mehr Infos ></button>
-      </div>
-  
-      <div class="Projekt-Karte">
-        <h1>Steckbrett-Computer</h1>
-        <img src="img/projekt2.png" alt="Projekt 2">
-        <p>8-Bit Computer, konstruiert auf einer Reihe von Steckbrettern, der die grundlegende Funktionsweise von Computerhardware veranschaulichen soll. Der ganze Computer besteht nur aus simplen ICs der 74er Serie TTL-Chips und jeder Teil ist mit einer Reihe von LEDs ausgestatted, die die gespeicherten Daten anzeigen.</p>
-        <button class="Projekt-Link" onclick="redirectProjekt(2)">Mehr Infos ></button>
-      </div>
-  
-      <div class="Projekt-Karte">
-        <h1>Nixie-Uhr</h1>
-        <img src="img/projekt3.png" alt="Projekt 3">
-        <p>Dekorative Uhr aus alten russischen Nixie-Röhren (Kaltkathodenröhren). Die komplette Uhr besteht nur aus einer Platine, die das spezielle Netzteil und die ICs zur Ansteuerung der Röhren beinhaltet.</p>
-        <button class="Projekt-Link" onclick="redirectProjekt(3)">Mehr Infos ></button>
-      </div>
-  
-      <div class="Projekt-Karte">
-        <h1>Diese Webseite</h1>
-        <img src="img/projekt4.png" alt="Projekt 4">
-        <p>Lustig das hier als Projekt hinzuzufügen, aber diese Webseite ist auch ein Projekt von mir. Der Quellcode ist 100% aus meiner Hand. Für interessierte ist der Quellcode ebenfalls auf meiner Github-Seite.</p>
-        <button class="Projekt-Link" onclick="redirectProjekt(4)">Mehr Infos ></button>
-      </div>
-    </section>
-
-
-    <!-- Github Sektion -->
-    <section id="Github-Sektion">
-      <h1>Der Sourcecode für alle meine Projekte befindet sich öffentlich auf Github</h1>
-      <img src="img/github-logo.png" alt="Github-Logo" height="150">
-      <a id="Github-Link" href="https://github.com/SebastianBraun01?tab=repositories">Ansehen >></a>
-    </section>
+    <canvas width="1350" height="500"></canvas>
   </main>
-
-
-  <!-- Javascript -->
-  <script src="js/script.js"></script>
 </body>
 </html>

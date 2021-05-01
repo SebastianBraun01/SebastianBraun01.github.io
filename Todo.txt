@@ -11,3 +11,4 @@
 - Schöneres Logo im Programmierstil
 - schönes foto von mir
 - kleine Biographie von mir
+- kleines Tab Logo

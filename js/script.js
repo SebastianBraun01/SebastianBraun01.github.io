@@ -31,4 +31,4 @@ function animation() {
 }
 
 drawSine(0);
-animation();
+// animation();

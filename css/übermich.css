@@ -1,0 +1,42 @@
+main {
+  display: grid;
+  grid-auto-flow: column;
+  margin-top: 4rem;
+}
+
+#Bild {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+#Bild img {
+  margin-bottom: 2rem;
+}
+
+.Link-Button {
+  padding: 0.8rem 0.8rem;
+  margin: 0.7rem 0.7rem;
+  border: white solid 2px;
+  text-decoration: none;
+  color: white;
+  font-size: 1.15rem;
+}
+
+.Link-Button:hover {
+  color: purple;
+  background-color: rgb(27, 27, 27);
+  border: purple solid 2px;
+  transition-duration: 200ms;
+}
+
+#Text {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+#Text p {
+  font-size: 1.05rem;
+}
