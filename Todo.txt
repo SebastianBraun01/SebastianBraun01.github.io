@@ -12,3 +12,5 @@
 - schönes foto von mir
 - kleine Biographie von mir
 - kleines Tab Logo
+- Github Lizenz für meine Projekte
+- Reiter Projekte für Navbar (mit Dropdown)

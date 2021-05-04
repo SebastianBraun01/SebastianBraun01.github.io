@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/led_beleuchtung.css">
+  <title>LED-Beleuchtung | Sebastian Braun</title>
+</head>
+
+<body>
+  <!-- Navbar mit Logo -->
+  <header>
+    <div id="logo-container">
+      <img src="../img/logo_hell.png" height="65" alt="Logo" >
+    </div>
+
+    <nav>
+      <ul>
+        <li class="nav-link"><a class="link-text" href="../index.html">home();</a></li>
+        <li class="nav-link"><a class="link-text" href="../pages/übermich.html">getInfo();</a></li>
+        <li class="nav-link"><a class="link-text" href="../pages/template.html">template();</a></li>
+        <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01">github();</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+
+  <!-- Hauptseite -->
+  <main>
+    <section id="Titel">
+      <h1>LED-Beleuchtung</h1>
+      <img src="" alt="Foto noch einfügen">
+    </section>
+
+    <section id="Beschreibung">
+      <p>Meine Freunde, mein Bruder und ich haben uns zu Hause einen Raum im Keller eingerichtet, wo wir treffen und Musik hören können. Ich wollte den Raum mit LED Streifen ausstatten, die ein paar Lichteffekte abspielen und sich wahlweise auch mit der Musik syncronisieren.</p>
+      <br>
+      <br>
+      <p>Für die LED Streifen habe ich für die WS2812B entschieden, oder auch Neopixel, wie Adafruit wirbt. Dies sind digitale LEDs, deren Farbe frei programmierbar ist und die sich kaskadieren lassen. Dadurch lassen sich alle möglichen Farbmuster anzeigen, im gegensatz zu konventionellen RGB LEDs.
+      Es braucht jedoch einen Mikrocontroller oder eine andere Steuerung, um die LEDs zu bedienen. Dafür nehme ich einen Arduino Nano 33 IOT. Das gibt mir einerseits den Vorteil, dass ich keine aufwendigen Funktionen für die Neopxiel selber schreiben muss, da Adafruit eine Bibliothek für Arduino anbietet und andererseits kann ich über die WLAN die Steuerungen für die einzelnen Streifen untereinander syncronisieren, damit alle Lichteffekte perfekt gleich angezeigt werden. Außerdem kann ich dann die Beleuchtung mit meinen Handy steuern (näheres später 😏).</p>
+      <br>
+      <br>
+      <p>Jeder einzelne Streifen bekommt eine Steuerung. Das ist einfach eine Platine mit dem Arduino und den weiteren passiven Komponenten. Für die Platinen mach ich noch ein kleines Gehäuse mit meinem 3D Drucker. Den Schaltplan und die Dateien für das Gehäuse kann man in meinem GitHub Repository finden.</p>
+      <br>
+      <br>
+      <img src="" alt="Bild Schaltplan">
+      <img src="" alt="Bild von der Platine">
+      <img src="" alt="Bild vom Gehäuse">
+      <br>
+      <br>
+
+
+
+      <p>Nun zum Programmcode. </p>
+    </section>
+
+    <section id="Links">
+      <a href="#">Projekt Repository</a>
+    </section>
+  </main>
+</body>
+</html>

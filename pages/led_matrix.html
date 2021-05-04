@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/led_matrix.css">
+  <title>LED-Matrix | Sebastian Braun</title>
+</head>
+
+<body>
+  <!-- Navbar mit Logo -->
+  <header>
+    <div id="logo-container">
+      <img src="../img/logo_hell.png" height="65" alt="Logo" >
+    </div>
+
+    <nav>
+      <ul>
+        <li class="nav-link"><a class="link-text" href="../index.html">home();</a></li>
+        <li class="nav-link"><a class="link-text" href="../pages/übermich.html">getInfo();</a></li>
+        <li class="nav-link"><a class="link-text" href="../pages/template.html">template();</a></li>
+        <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01">github();</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+
+  <!-- Hauptseite -->
+  <main>
+    <section id="Titel">
+      <h1>LED-Matrix</h1>
+      <img src="" alt="Foto noch einfügen">
+    </section>
+
+    <section id="Beschreibung">
+      <p>Die LED Matrix gehört technisch gesehen, noch zu meinem anderen Projekt, der LED Beleuchtung, hat aber mitlerweile eine solche komplexität erreicht, dass es sinnvol ist sie hier nochmal ausführlich zu beschreiben. Die LED Matrix wird ein tolles Gimmik für unseren Partykeller, unzwar ein riesiger Audio Spektrograph. Die Steuerung der Matrix wird dann mit dem Mischpult unserer Surround-Anlage verbunden und zeigt in verschiedenen Formen und Farben das Frequenzspektrum der Musik.</p>
+      <br>
+      <br>
+
+
+      <p>Matrix aufbau erklären</p>
+
+
+      <br>
+      <br>
+      <img src="" alt="Bild der CAD Konstruktion">
+      <img src="" alt="Bild der Verkabelung">
+      <br>
+      <br>
+      <p>Nun zur Steuerung, dem komplizierten Teil. Ursprünglich ich die LED Matrix auch nur mit einem normalen Arduino betreiben. Dafür habe ich von Adafruit eine FFT Bibliothek gefunden. Der "Fast Fourier Transform (FFT)" ist ein mathematischer Algorythmus, mit dem ein Computer oder Mikrocontroller aus den Messpunkten des Zeitsignal der Musik ein Frequenzspektrum berechnen kann, für mich also die charakteristischen Balken, die die Anteile hohen und tiefen Töne in der Musik anzeigen (auf den FFT Algorythmus möchte ich in einem anderen Artikel noch genauer eingehen, die Projektbeschreibung wird hier so schon noch lang genug).</p>
+      <br>
+      <br>
+      <p>Der Arduino sollte also die Messpunkte mit dem integrierten AD Wandler aufnehmen, diese mit dem FFT Algorythmus verarbeiten und das Ergebnis auf der Matrix ausgeben. Dafür habe ich einen kleinen Prototypen gebaut. Dieser hat auch perfekt funktioniert.</p>
+      <br>
+      <br>
+      <video src="" muted preload ></video>
+      <p>Video von Prototyp einfügen</p>
+      <br>
+      <br>
+      <p>Diese Herangehensweise hat nur einen Haken. Je größer die Matrix wird, desto langsamer wird die ganze Rechnerei im Mikrocontroller, weil die Berechnungen und das Ansteuern der Matrix zeit brauchen und nicht parallel ablaufen können. Mit diesem kleinen Prototypen funktioniert noch alles einwandfrei, aber wenn ich die Steuerung an die große Matrix hänge, wird das nur noch eine Diashow.</p>
+      <br>
+      <br>
+      <p>Ein anderer Plan muss her und da bin ich auf FPGAs gekommen. </p>
+    </section>
+
+    <section id="Links">
+      <a href="#">Projekt Repository</a>
+    </section>
+  </main>
+</body>
+</html>
