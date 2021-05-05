@@ -61,7 +61,30 @@
       <p>Diese Herangehensweise hat nur einen Haken. Je größer die Matrix wird, desto langsamer wird die ganze Rechnerei im Mikrocontroller, weil die Berechnungen und das Ansteuern der Matrix zeit brauchen und nicht parallel ablaufen können. Mit diesem kleinen Prototypen funktioniert noch alles einwandfrei, aber wenn ich die Steuerung an die große Matrix hänge, wird das nur noch eine Diashow.</p>
       <br>
       <br>
-      <p>Ein anderer Plan muss her und da bin ich auf FPGAs gekommen. </p>
+      <p>Ein anderer Plan musste her und da bin ich auf FPGAs gekommen. Es gibt von Arduino nämlich den MKR Vidor 4000, ein Development Board auf dem ein Mikrocontroller (SAM21) und ein FPGA (Intel Cyclone 10) verbaut ist. Ein FPGA ist ideal für dieses Projekt, da ich alle Aufgaben (außer das samplen mit dem ADC) auf dem FPGA parallel betreiben und wie eine Pipeline behandeln kann und das mit einem noch viel höhren Takt. Das ist vor allem für die Ansteuerung der Matrix wichtig, da ich jetzt nicht einen großen Streifen ansteuern muss, der die Matrix bildet, sondern ich kann jetzt für jede einzelne Spalte der Matrix, einen seperaten Streifen benutzen und diese alle komplett parallel ansteuern und das mit bis zu 200MHz (ist ein bischen übertrieben, aber möglich 😎). Auf dem Arduino gibt es ein 24MHz Taktsignal für den FPGA, das hat bis jetzt für alles einwandfrei funktioniert.</p>
+      <br>
+      <br>
+      <img src="" alt="Arduino MKR Vidor 4000">
+      <br>
+      <br>
+      <p>Um den FPGA zu programmieren, benutze ich Verilog, ich bin zwar über die Hochschule auch mit VHDL vertraut aber ich finde den Syntax von Verilog wesentlich besser und ich mag die Nähe zur C Programmiersprache. Ich habe das Programm für den FPGA auf mehrere Module aufgeteilt:</p>
+      <br>
+      <br>
+      <ul>
+        <li>npxl_treiber:     Treibermodul für die LED Streifen</li>
+        <li>npxl_controller:  Liest Farbdaten ein und gibt sie über die Streifen aus</li>
+        <li>ROM:              Speichert momentan feste Farbmuster für die Balkenanzeige des FFT Outputs</li>
+        <li>RAM:              Blockram als Zwischenspeicher für FFT Werte</li>
+        <li>uart_rx:          UART Empfänger um ADC Daten vom Mikrocontroller zu empfangen</li>
+        <li>FFT:              FFT Megafunktion (von Gisselquist, Link unten)</li>
+        <li>spektrometer:     Top Modul für das FPGA programm, bindet alle benötigten Sub Module ein</li>
+      </ul>
+      <br>
+      <br>
+      <img src="" alt="Diagramm vom Programmaufbau">
+      <br>
+      <br>
+      <p>Beschreibungen der Module</p>
     </section>
 
     <section id="Links">
