@@ -53,13 +53,17 @@
       <p>Netzteil hat einwandfrei funktioniert also habe ich den Schaltplan des Netzteils auf die Nixie Uhr Platine kopiert und die komplette Platine fertig entworfen. Jetzt kommt die Frage wie ich die einzelnen Pins der Nixies am besten schalte, denn jede Ziffer hat eine eigene Kathode. Eine Möglichkeit währen MOSFETs für jeden Pin, aber das währen 60 MOSFETs für alle 6 Röhren und um Gotteswillen das mach ich nicht. Dann gäbe es noch spezielle Treiberchips: entweder die traditionellen 74LS141, speziell für Nixie Röhren oder ein Latch-Array das für hohe Spannungen ausgelegt ist. Ich hab mir 6 von den 74LS141 bestellt. Im Endeffekt sind diese nur BCD auf Dezimal Umsetzer für Nixie Röhren. Soweit so gut. Jetzt hab ich aber immer noch 24 Pins zu schalten. Damit der Arduino alle pins schalten kann (und ja ich benutze einen Arduino zur Steuerung), kann ich ganz einfach 3 8-Bit Schieberegister benutzen, ganz normale 74HC595.</p>
       <br>
       <br>
-      <p>Dann zum Programm.</p>
+      <p>Kleine Anmerkung: Ich habe unter jeder Röhre noch eine kleiene Blaue LED plaziert. Das wird bei Nixie Uhren öfter gemacht, weil das blaue Licht im Kontrast mit dem warmen orangen Leuchten der Nixie Röhren einen tollen Effekt erzielt.</p>
+      <p>Nun zum Programm. Das Programm ist recht simpel. Der interne RTC des Arduino hält die aktuelle Zeit und diese muss ich nur noch über die Schieberegister richtig formatiert ausgeben. Sonst benutze ich nur noch die Blynk Bibliothek, um mit meinem Handy, die Röhren und die blaue Beleuchtung ein und ausschaltung zu können und um die Uhrzeit zu stellen. Die Blynk Bibliothek habe ich in meinem LED Beleuchtungs Projekt genauer erklärt.</p>
+      <br>
+      <br>
+      <p>Soweit gibts eigendlich nichts mehr zum Projekt zu sagen. Ich freue mich über Kommentare und Verbesserungsvorschläge. Das Repository mit dem Code und dem Schaltplan ist unten verlinkt. Ich habe noch einen Link zu Seite von Dalibor Farny dazugepackt. Er stellt eigenhändig Nixie Röhren her, die einfach nur sexy aussehen. Ich habe momentan andere Röhren in meiner Uhr verbaut, aber ich habe irgendwann auf jeden Fall vor, auf diese Röhren abzugraden (aber nicht jetzt, die sind nämlich echt teuer).</p>
     </section>
 
     <section id="Links">
       <a href="#">Projekt Repository</a>
-      <a href="#">Threeneuron's Pile o Poo seite</a>
-      <a href="#">Dalibor Farny Seite</a>
+      <a href="https://threeneurons.wordpress.com/nixie-power-supply/">Threeneuron's Pile o Poo seite</a>
+      <a href="https://www.daliborfarny.com/">Dalibor Farny Seite</a>
     </section>
   </main>
 </body>

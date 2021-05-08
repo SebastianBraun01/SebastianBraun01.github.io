@@ -49,14 +49,19 @@
       <img src="" alt="Bild vom Gehäuse">
       <br>
       <br>
-
-
-
-      <p>Nun zum Programmcode. </p>
+      <p>Nun zum Programmcode. Wie ich oben schon erwähnt habe, gibt es für die LED Streifen eine Bibliothek für Arduino. Darüber hinaus habe ich für die Steuerung die Blynk IOT Platform gefunden, der Arduino und mein Handy verbinden sich mit einem Server und können untereinander Informationen austauschen. Ich kann also mit dem Handy Befehler an die LED Streifen senden und deren Status auslesen. Außerdem syncronisieren so die einzelnen Streifen ihre Lichteffekte. Außerdem werde ich noch einen Arduino plazieren, der mit dem Mischpult der Surround Anlage verbunden ist und konstant die Lautstärkedaten ins Netzwerk sendet, sodas ich die Möglichkeit habe Lichteffekte zu programmieren, die sich mit der Musik syncronisieren.</p>
+      <br>
+      <br>
+      <p>Auf meinem Handy kann ich die App von Blynk installieren und die Steuerungselemente anpassen. Es gibt eine Reihe von coolen Controllblöcken und deren Funktionen sind auf der Documentation Seite von Blynk beschrieben. Ich muss nur noch die Arduinos, die ich für das Projekt verwende in der App registrieren. Dann bekomme ich die Geräte-IDs, die ich in die Programme der Arduinos eintrage, damit klar ist wer mit wem kommuniziert. Wenn das getan ist und sich alle mit dem WLAN verbunden haben, kann man nun mit dem Handy die Lichteffekte auswählen, die Helligkeit der LEDs ändern, die Farbe bei einfarbigen Effekten auswählen und die Effekt Geschwindigkeit einstellen und bekommt immer eine Bestätigung auf dem Terminal auf dem Handy.</p>
+      <br>
+      <br>
+      <p>Das Repository mit dem Programmcode ist unten verlinkt. Ich empfehle einfach mal reinzuschauen, ich freue mich über Kommentare und Verbesserungsvorschläge. Ich habe auch noch andere Projekte die man sich anschauen kann. Insbesondere das Projekt LED-Matrix hat auch mit diesem hier zu tun.</p>
     </section>
 
     <section id="Links">
-      <a href="#">Projekt Repository</a>
+      <a href="https://github.com/SebastianBraun01/LED_Streifen">Projekt Repository</a>
+      <a href="https://blynk.io/">Blynk Bibliothek</a>
+      <a href="https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-use">Adafruit Neopixel Bibliothek</a>
     </section>
   </main>
 </body>
