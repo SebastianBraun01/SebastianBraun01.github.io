@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["DOM", "ESNext"],
-    "noUnusedLocals": true,
-    "watch": true,
-    "outDir": "../js/"
-  }
-}

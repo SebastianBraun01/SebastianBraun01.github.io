@@ -1,5 +1,5 @@
-const canvas: HTMLElement = document.getElementById('canvas') as HTMLCanvasElement;
-const c: CanvasRenderingContext2D = canvas.getContext('2d')
+const canvas = <HTMLCanvasElement> document.getElementById('canvas');
+const c = canvas.getContext('2d');
 
 let breite = canvas.width;
 let höhe = canvas.height;
