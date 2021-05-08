@@ -9,8 +9,7 @@
 
 
 body {
-  color: white;
-  background-color: rgb(83, 83, 83);
+  background-color: #3B4252;
   font-family: 'Share Tech Mono', monospace;
 }
 
@@ -19,8 +18,7 @@ header {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-
-  border-bottom: white solid 1px;
+  margin: 1.5rem 1.5rem;
 }
 
 nav, ul {
@@ -48,7 +46,7 @@ nav, ul {
 }
 
 .link-text:hover {
-  color: purple;
-  background-color: rgb(27, 27, 27);
-  transition-duration: 200ms;
+  color: #B48EAD;
+  background-color: #4C566A;
+  transition-duration: 250ms;
 }
