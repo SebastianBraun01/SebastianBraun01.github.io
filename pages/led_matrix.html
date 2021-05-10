@@ -37,11 +37,7 @@
       <p>Die LED Matrix gehört technisch gesehen, noch zu meinem anderen Projekt, der LED Beleuchtung, hat aber mitlerweile eine solche komplexität erreicht, dass es sinnvol ist sie hier nochmal ausführlich zu beschreiben. Die LED Matrix wird ein tolles Gimmik für unseren Partykeller, unzwar ein riesiger Audio Spektrograph. Die Steuerung der Matrix wird dann mit dem Mischpult unserer Surround-Anlage verbunden und zeigt in verschiedenen Formen und Farben das Frequenzspektrum der Musik.</p>
       <br>
       <br>
-
-
-      <p>Matrix aufbau erklären</p>
-
-
+      <p>Matrix wird noch gebaut (to be continued).</p>
       <br>
       <br>
       <img src="" alt="Bild der CAD Konstruktion">
@@ -84,7 +80,34 @@
       <img src="" alt="Diagramm vom Programmaufbau">
       <br>
       <br>
-      <p><!-- Beschreibungen der Module --></p>
+      <p>Die Basis der Anzeige ist der npxl_treiber. Dieses Modul ließt den 24Bit Farbcode LED für LED ein und zeigt ihn an, ist das Ende des Streifens errecht wird die Datenleitung für 50µs auf Null gesetzt um die Daten in den LEDs zu bestätigen. Im inneren des Moduls läuft eine Automatenkonstrukt, das das lesen und senden der einzelnen Bits koordiniert.</p>
+      <br>
+      <br>
+      <img src="" alt="Datenblatt WS2812B">
+      <br>
+      <br>
+      <p>Der npxl_controller importiert den npxl_treiber und ein ROM Modul. Die Außführung dieses Modul kann sich in der Zukunft noch ändert, aber in seiner jetzigen Form ließt es einen Höhenwert ein (also den Pegel der Musik) und lässt von unten hoch dementsprechend viele LEDs mit einer festen Farbe leuchten, während es die LEDs darüber ausschaltet. So habe ich meine Pegelanzeige für die FFT Megafunktion. Die Farbdaten werden von dem ROM gelesen.</p>
+      <br>
+      <br>
+      <p>Das uart_rx Modul ist dafür zuständig die Samples vom Mikrocontroller zu empfangen und über ein Register zur FFT Megafunktion weiterzuleiten. Das Programm für UART ist eigentlich relativ einfach aufgebaut, was man gar nicht erwarten würde. Wenn es das UART Startbit erkennt erwartet es 8 Datenbits und prüft dann ob ein Stopbit gesendet wurde um die Übertragung zu bestätigen. Wenn das geschehen ist liegen die Daten am Ausgangsregister an und ein data-valid Signal wird gesetzt.</p>
+      <br>
+      <br>
+      <img src="" alt="UART Protokoll">
+      <br>
+      <br>
+      <p>Jetzt kommt das FFT Modul. Ersteinmal möchte ich ein großes Lob an Gisselquist aussprechen, der den eigentlichen FFT Kern entworfen hat und auf GitHub einen Generator für angepasste FFT Kerne zu Verfügung stellt. Auf seiner Webseite ist der Aufbau und die Funktionsweise des Kerns exellent beschrieben und ich bin froh, dass ich das Projekt gefunden habe. Ein Link zur seiner Seite ist unten. Aber nun zum Technischen. Das FFT Modul, das ich programmiert habe ist ein Wrapper um den FFT Kern herum, damit ich ein gewisses Maß an Flowcontroll mit dem Kern habe und dass ich ihn in einer Burst Konfiguration benutzen kann, weil der eigentliche Kern eine Pipeline hat. Einfach ausgedrückt: Der Kern selbst erwartet eine gewisse Anzahl an Samples und rechnet kontinuierlich ab dem ersten Sample.</p>
+      <br>
+      <br>
+      <p>Mit meinem Design außenrum wartet er nun bis er alle Samples hat, rechnet dann alles durch und gibt dann das komplette Ergebnis aus bevor er neue Samples empfangen kann, er rechnet also immer Etappenweise oder in Burst Konfiguration. Zusätzlich hat er noch Signale, die anzeigen wann er rechnet und wann Daten geschrieben und gelesen werden können und schon habe ich ein FFT Modul perfekt für mein Projekt.</p>
+      <br>
+      <br>
+      <img src="" alt="Aufbau FFT Modul">
+      <br>
+      <br>
+      <p>Das spektrometer Modul fügt alle anderen Bausteine zusammen und ist das Modul, das dann letztendlich auf den FPGA kommt. Alle Module koordinieren sich untereinander mit Ready- und Startsignalen.</p>
+      <br>
+      <br>
+      <p>Das war jetzt eine ganz schöne Wand von Text. Ich hoffe das Projekt findet ein bischen Aufmerksamkeit auf GitHub und ich freue mich über Kommentare und Verbesserungsvorschläge. Das Repository ist unten verlinkt.</p>
     </section>
 
     <section id="Links">

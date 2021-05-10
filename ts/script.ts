@@ -30,5 +30,5 @@ function animation() {
   requestAnimationFrame(animation);
 }
 
-drawSine(0);
+// drawSine(0);
 // animation();
