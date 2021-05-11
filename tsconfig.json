@@ -2,7 +2,6 @@
   "include": ["./ts/*"],
   "compilerOptions": {
     "outDir": "./js/",
-    "watch": true,
 
     "target": "ES6",
     "lib": ["DOM", "ES6"],

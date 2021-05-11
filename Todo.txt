@@ -1,12 +1,7 @@
-- eigene js Datei für jede Seite
 - light mode/dark mode slider
 
 - Coole Oszi animation auf der Titelseite
 - Modernes Layout mit animationen (Videos)
-- kleine Spielerreien auf den Seiten
-- Programmierstil für den Text
-- Schöneres Logo im Programmierstil
 - schönes foto von mir
 - kleines Tab Logo
 - Github Lizenz für meine Projekte
-- Reiter Projekte für Navbar (mit Dropdown)

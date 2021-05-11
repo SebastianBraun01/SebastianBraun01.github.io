@@ -2,19 +2,11 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: whitesmoke;
-  margin: 3rem 15rem 10rem 15rem;
+  margin: 0 20rem;
+  padding-top: 5rem;
 }
 
-#Bild {
-  margin: 4rem 0;
-}
-
-#Text {
-  padding: 0 10rem;
-}
-
-#Text p {
+#Beschreibung p {
   font-size: 1.2rem;
 }
 
@@ -26,15 +18,15 @@ main {
 .Link-Button {
   padding: 0.8rem 0.8rem;
   margin: 0.7rem 0.7rem;
-  border: #3B4252 solid 2px;
+  border: var(--hintergrund_dunkel) solid 2px;
   text-decoration: none;
-  color: #3B4252;
+  color: var(--hintergrund_dunkel);
   font-size: 1.15rem;
 }
 
 .Link-Button:hover {
-  color: #B48EAD;
-  background-color: #D8DEE9;
-  border: #B48EAD solid 2px;
+  color: var(--text_hover);
+  background-color: var(--hintergrund_dunkel);
+  border: var(--text_hover) solid 2px;
   transition-duration: 200ms;
 }

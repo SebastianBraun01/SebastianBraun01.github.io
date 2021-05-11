@@ -4,35 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/übermich.css">
+  <link rel="stylesheet" href="../css/artikel.css">
   <title>Über mich | Sebastian Braun</title>
 </head>
 
 <body>
   <!-- Navbar mit Logo -->
-  <header>
+  <header id="haupt-nav" class="schatten">
     <div id="logo-container">
       <img src="../img/logo_hell.png" height="65" alt="Logo" >
     </div>
 
     <nav>
-      <ul>
-        <li class="nav-link"><a class="link-text" href="../index.html">home();</a></li>
-        <li class="nav-link"><a class="link-text" href="../pages/übermich.html">getInfo();</a></li>
-        <li class="nav-link"><a class="link-text" href="../pages/template.html">template();</a></li>
-        <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank">github();</a></li>
-      </ul>
+      <li class="nav-link"><a class="link-text" href="../index.html">Home</a></li>
+      <li class="nav-link"><a class="link-text" href="#" id="dropdown">˃Projekte</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/übermich.html">Über mich</a></li>
+      <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank"><img src="../img/github-logo.png" width="40"><span>GitHub</span></a></li>
+    </nav>
+
+    <script defer src="../js/navigation.js"></script>
+  </header>
+  <header id="sub-nav" class="unsichtbar">
+    <nav>
+      <li class="nav-link"><a class="link-text" href="../pages/led_beleuchtung.html">LED Beleuchtung</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/led_matrix.html">LED Matrix</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/nixie_uhr.html">Nixie Uhr</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/rustuino.html">Rustuino</a></li>
     </nav>
   </header>
 
 
   <!-- Hauptseite -->
   <main>
-    <section id="Bild">
+    <section id="Kopf">
       <img src="../img/github-logo.png" alt="Foto" width="300">
     </section>
 
-    <section id="Text">
+    <section id="Beschreibung">
       <p>Servus! Willkommen auf meiner Webseite!</p>
       <br>
       <br>
@@ -48,7 +56,7 @@
       <p>Viele der Themen, die ich genannt habe, habe ich in der Hochschule gelernt oder vertieft, aber mit den meisten habe ich mich Hobbymäßig beschäftigt. Und bei manchen Sachen (z.B FPGAs) fanden es die Professoren interessant, dass ich mich mit diesen Sachen schon beschäftigt habe.</p>
       <br>
       <br>
-      <p>So gut wie alle Projekte, an denen ich in meiner Freizeit bastle, liegen öffentlich auf GitHub. Und zusammen mit dieser Webseite, wo ich meine Projekte genauer Dokumentieren kann, kann ich anderen Leuten zeigen, was ich so drauf habe (oder was nicht :sweat_smile:).</p>
+      <p>So gut wie alle Projekte, an denen ich in meiner Freizeit bastle, liegen öffentlich auf GitHub. Und zusammen mit dieser Webseite, wo ich meine Projekte genauer Dokumentieren kann, kann ich anderen Leuten zeigen, was ich so drauf habe (oder was nicht 😅).</p>
     </section>
 
     <section id="Links">

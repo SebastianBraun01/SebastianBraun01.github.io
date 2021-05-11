@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
+/* ----- Farben ----- */
+:root {
+  --text_hell: #B6B6B6;
+  --text_dunkel: #3B4252;
+  --text_hover: #DF49A6;
+
+  --hintergrund_hell: whitesmoke;
+  --hintergrund_dunkel: #23232E;
+  --hintergrund_hover: #141418;
+}
+
+
 /* ----- Globale Einstellungen ----- */
 * {
   margin: 0;
@@ -8,45 +20,59 @@
 }
 
 body {
-  background-color: #3B4252;
+  background-color: var(--hintergrund_hell);
   font-family: 'Share Tech Mono', monospace;
 }
 
 
 /* ----- Navbar ----- */
-header {
+#haupt-nav {
   display: flex;
-  align-items: stretch;
   justify-content: space-between;
-  margin: 1.5rem 1.5rem;
+  padding: 10px 100px;
+  background-color: var(--hintergrund_dunkel);
 }
 
-nav, ul {
+#haupt-nav nav {
   display: flex;
-  align-items: stretch;
-  padding-right: 50px;
+}
+
+#sub-nav nav {
+  display: flex;
+  height: 70px;
+  background-color: var(--hintergrund_dunkel);
+  border-top: var(--highlight_text) 1px solid;
+  padding: 10px 0;
 }
 
 .nav-link {
   display: flex;
   list-style: none;
-  flex-grow: 1;
-  align-self: stretch;
+  padding: 0 6px;
 }
 
 .link-text {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: white;
-  font-size: 1.2rem;
+  color: var(--text_hell);
+  font-size: 1.4rem;
   font-weight: bold;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 0 10px;
 }
 
 .link-text:hover {
-  color: #B48EAD;
-  background-color: #4C566A;
+  color: var(--text_hover);
+  background-color: var(--hintergrund_hover);
   transition-duration: 250ms;
+}
+
+
+/* ----- Script Elemente ----- */
+.unsichtbar {
+  display: none;
+}
+
+.schatten {
+  box-shadow: 5px 5px 8px var(--text_hell);
 }

@@ -10,18 +10,26 @@
 
 <body>
   <!-- Navbar mit Logo -->
-  <header>
+  <header id="haupt-nav" class="schatten">
     <div id="logo-container">
       <img src="../img/logo_hell.png" height="65" alt="Logo" >
     </div>
 
     <nav>
-      <ul>
-        <li class="nav-link"><a class="link-text" href="../index.html">home();</a></li>
-        <li class="nav-link"><a class="link-text" href="../pages/übermich.html">getInfo();</a></li>
-        <li class="nav-link"><a class="link-text" href="../pages/template.html">template();</a></li>
-        <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank">github();</a></li>
-      </ul>
+      <li class="nav-link"><a class="link-text" href="../index.html">Home</a></li>
+      <li class="nav-link"><a class="link-text" href="#" id="dropdown">˃Projekte</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/übermich.html">Über mich</a></li>
+      <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank"><img src="../img/github-logo.png" width="40"><span>GitHub</span></a></li>
+    </nav>
+
+    <script defer src="../js/navigation.js"></script>
+  </header>
+  <header id="sub-nav" class="unsichtbar">
+    <nav>
+      <li class="nav-link"><a class="link-text" href="../pages/led_beleuchtung.html">LED Beleuchtung</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/led_matrix.html">LED Matrix</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/nixie_uhr.html">Nixie Uhr</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/rustuino.html">Rustuino</a></li>
     </nav>
   </header>
   

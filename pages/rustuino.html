@@ -4,24 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/rustuino.css">
+  <link rel="stylesheet" href="../css/artikel.css">
   <title>Rustuino | Sebastian Braun</title>
 </head>
 
 <body>
   <!-- Navbar mit Logo -->
-  <header>
+  <header id="haupt-nav" class="schatten">
     <div id="logo-container">
       <img src="../img/logo_hell.png" height="65" alt="Logo" >
     </div>
 
     <nav>
-      <ul>
-        <li class="nav-link"><a class="link-text" href="../index.html">home();</a></li>
-        <li class="nav-link"><a class="link-text" href="../pages/übermich.html">getInfo();</a></li>
-        <li class="nav-link"><a class="link-text" href="../pages/template.html">template();</a></li>
-        <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank">github();</a></li>
-      </ul>
+      <li class="nav-link"><a class="link-text" href="../index.html">Home</a></li>
+      <li class="nav-link"><a class="link-text" href="#" id="dropdown">˃Projekte</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/übermich.html">Über mich</a></li>
+      <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank"><img src="../img/github-logo.png" width="40"><span>GitHub</span></a></li>
+    </nav>
+
+    <script defer src="../js/navigation.js"></script>
+  </header>
+  <header id="sub-nav" class="unsichtbar">
+    <nav>
+      <li class="nav-link"><a class="link-text" href="../pages/led_beleuchtung.html">LED Beleuchtung</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/led_matrix.html">LED Matrix</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/nixie_uhr.html">Nixie Uhr</a></li>
+      <li class="nav-link"><a class="link-text" href="../pages/rustuino.html">Rustuino</a></li>
     </nav>
   </header>
   
@@ -53,8 +61,8 @@
     </section>
 
     <section id="Links">
-      <a href="https://github.com/SebastianBraun01/rustuino" target="_blank">Projekt Repository</a>
-      <a href="https://www.rust-lang.org/" target="_blank">Rust Webseite</a>
+      <a class="Link-Button" href="https://github.com/SebastianBraun01/rustuino" target="_blank">Projekt Repository</a>
+      <a class="Link-Button"  href="https://www.rust-lang.org/" target="_blank">Rust Webseite</a>
     </section>
   </main>
 </body>
