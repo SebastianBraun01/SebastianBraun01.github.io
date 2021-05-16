@@ -1,7 +1,0 @@
-- light mode/dark mode slider
-
-- Coole Oszi animation auf der Titelseite
-- Modernes Layout mit animationen (Videos)
-- schönes foto von mir
-- kleines Tab Logo
-- Github Lizenz für meine Projekte

@@ -6,6 +6,11 @@ main {
   padding-top: 5rem;
 }
 
+#Kopf h1 {
+  padding-bottom: 50px;
+  font-size: 2rem;
+}
+
 #Beschreibung p {
   font-size: 1.2rem;
 }

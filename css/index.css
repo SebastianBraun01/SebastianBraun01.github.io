@@ -1,3 +1,48 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #canvas {
+  margin-top: 50px;
   border-bottom: black 1px dotted;
+}
+
+#Projektkarten {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 100px;
+  padding: 100px;
+}
+
+.Karte {
+  display: flex;
+
+  padding: 20px;
+  border: var(--hintergrund_dunkel) 1px solid;
+  color: var(--text_hell);
+  background-color: var(--hintergrund_dunkel);
+  box-shadow: 5px 5px 8px black;
+  border-radius: 5px;
+}
+
+.Karte p {
+  margin-bottom: 15px;
+}
+
+.button {
+  padding: 15px;
+  color: var(--text_hell);
+  background-color: var(--hintergrund_dunkel);
+  border: var(--text_hell) 1px solid;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.button:hover {
+  color: var(--text_hover);
+  background-color: var(--hintergrund_hover);
+  transition-duration: 250ms;
 }
