@@ -76,3 +76,20 @@ body {
 .schatten {
   box-shadow: 5px 5px 8px var(--text_hell);
 }
+
+
+/* ----- Media Query ----- */
+@media(max-width: 850px) {
+  header {
+    position: fixed;
+    width: 100vw;
+  }
+
+  #haupt-nav nav {
+    height: 70px;
+  }
+
+  #haupt-nav #logo-container {
+    display: none;
+  }
+}

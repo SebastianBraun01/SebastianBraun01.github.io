@@ -22,7 +22,7 @@
       <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank"><img src="../img/github-logo.png" width="40"><span>GitHub</span></a></li>
     </nav>
 
-    <script defer src="../js/navigation.js"></script>
+    <script defer src="../ts/out/navigation.js"></script>
   </header>
   <header id="sub-nav" class="unsichtbar">
     <nav>
@@ -36,7 +36,7 @@
 
   <!-- Hauptseite -->
   <main>
-    <section id="Titel">
+    <section id="Kopf">
       <h1>Nixie Uhr</h1>
       <img src="" alt="Foto noch einfügen">
     </section>
@@ -48,7 +48,7 @@
       <p>Die erste Frage ist: wie betreibe ich am besten die Nixie Röhren? Die Nixies, die ich verwende haben eine Zündspannung von 180V und eine Brennspannung von 150V mit einem Anodenstrom von 2mA. Ich brauche also ein Netzteil mit 180V DC. Die erstbeste Möglichkeit wäre, Netztspannung auf 180V RMS runter zu transformieren und dann gleichzurichten. Das wäre an sich auch echt simpel, der Nachteil ist nur dass ich dann einen riesigen Trafo am der Uhr hängen hätte und da ich eine freistehende Platine haben will, wäre das Sicherheitstechnisch mit der Netzspannung nicht die beste Idee. Mein Plan ist also ein 12V auf 180V DC-DC-Wandler zu entwerfen.</p>
       <br>
       <br>
-      <img src="" alt="Datenblatt der Nixie Röhren">
+      <iframe src="../img/IN-8.pdf" width="1000" height="800"> Datenblatt IN-8 Nixie Röhre</iframe>
       <br>
       <br>
       <p>Ich habe mir mehrere Designs von Nixie Schaltnetzteilen angeschaut und bin dann auf den Artikel von Threeneuron gestoßen, der die Vor- und Nachteile der verschiedenen Netztteile aufgezeigt hat und erklärt, was bei einem guten Netzteildesign zu beachten ist. Ich habe mir sein Design MK1.5 mit dem MC34063 Schalt-IC als Vorlage genommen und auf meine Bedürfnisse angepasst. Erstens sollte das Design komplett SMD sein, damit es sich schön auf der Unterseite der Platine verstecken kann und nicht überall oben die Pins herausstehen. Zweitens habe ich für die Feinjustage der Spannung noch einen Trimmerwiderstand einbaut. Und ich habe ein paar Bauteile angepasst auf welche, die ich schon da hatte. Dann hab ich die Platine in Eagle entworfen und alles bestellt.</p>
@@ -63,6 +63,9 @@
       <br>
       <p>Kleine Anmerkung: Ich habe unter jeder Röhre noch eine kleiene Blaue LED plaziert. Das wird bei Nixie Uhren öfter gemacht, weil das blaue Licht im Kontrast mit dem warmen orangen Leuchten der Nixie Röhren einen tollen Effekt erzielt.</p>
       <p>Nun zum Programm. Das Programm ist recht simpel. Der interne RTC des Arduino hält die aktuelle Zeit und diese muss ich nur noch über die Schieberegister richtig formatiert ausgeben. Sonst benutze ich nur noch die Blynk Bibliothek, um mit meinem Handy, die Röhren und die blaue Beleuchtung ein und ausschaltung zu können und um die Uhrzeit zu stellen. Die Blynk Bibliothek habe ich in meinem LED Beleuchtungs Projekt genauer erklärt.</p>
+      <br>
+      <br>
+      <img src="" alt="Bild von der App">
       <br>
       <br>
       <p>Soweit gibts eigendlich nichts mehr zum Projekt zu sagen. Ich freue mich über Kommentare und Verbesserungsvorschläge. Das Repository mit dem Code und dem Schaltplan ist unten verlinkt. Ich habe noch einen Link zu Seite von Dalibor Farny dazugepackt. Er stellt eigenhändig Nixie Röhren her, die einfach nur sexy aussehen. Ich habe momentan andere Röhren in meiner Uhr verbaut, aber ich habe irgendwann auf jeden Fall vor, auf diese Röhren abzugraden (aber nicht jetzt, die sind nämlich echt teuer).</p>

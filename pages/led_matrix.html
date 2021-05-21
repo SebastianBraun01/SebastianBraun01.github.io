@@ -22,7 +22,7 @@
       <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank"><img src="../img/github-logo.png" width="40"><span>GitHub</span></a></li>
     </nav>
 
-    <script defer src="../js/navigation.js"></script>
+    <script defer src="../ts/out/navigation.js"></script>
   </header>
   <header id="sub-nav" class="unsichtbar">
     <nav>
@@ -36,7 +36,7 @@
 
   <!-- Hauptseite -->
   <main>
-    <section id="Titel">
+    <section id="Kopf">
       <h1>LED-Matrix</h1>
       <img src="" alt="Foto noch einfügen">
     </section>
@@ -58,8 +58,7 @@
       <p>Der Arduino sollte also die Messpunkte mit dem integrierten AD Wandler aufnehmen, diese mit dem FFT Algorythmus verarbeiten und das Ergebnis auf der Matrix ausgeben. Dafür habe ich einen kleinen Prototypen gebaut. Dieser hat auch perfekt funktioniert.</p>
       <br>
       <br>
-      <video src="" muted preload ></video>
-      <p>Video von Prototyp einfügen</p>
+      <video src="../img/uv_prototyp.mp4" muted preload controls width="700"></video>
       <br>
       <br>
       <p>Diese Herangehensweise hat nur einen Haken. Je größer die Matrix wird, desto langsamer wird die ganze Rechnerei im Mikrocontroller, weil die Berechnungen und das Ansteuern der Matrix zeit brauchen und nicht parallel ablaufen können. Mit diesem kleinen Prototypen funktioniert noch alles einwandfrei, aber wenn ich die Steuerung an die große Matrix hänge, wird das nur noch eine Diashow.</p>
@@ -68,7 +67,7 @@
       <p>Ein anderer Plan musste her und da bin ich auf FPGAs gekommen. Es gibt von Arduino nämlich den MKR Vidor 4000, ein Development Board auf dem ein Mikrocontroller (SAM21) und ein FPGA (Intel Cyclone 10) verbaut ist. Ein FPGA ist ideal für dieses Projekt, da ich alle Aufgaben (außer das samplen mit dem ADC) auf dem FPGA parallel betreiben und wie eine Pipeline behandeln kann und das mit einem noch viel höhren Takt. Das ist vor allem für die Ansteuerung der Matrix wichtig, da ich jetzt nicht einen großen Streifen ansteuern muss, der die Matrix bildet, sondern ich kann jetzt für jede einzelne Spalte der Matrix, einen seperaten Streifen benutzen und diese alle komplett parallel ansteuern und das mit bis zu 200MHz (ist ein bischen übertrieben, aber möglich 😎). Auf dem Arduino gibt es ein 24MHz Taktsignal für den FPGA, das hat bis jetzt für alles einwandfrei funktioniert.</p>
       <br>
       <br>
-      <img src="" alt="Arduino MKR Vidor 4000">
+      <img src="../img/vidor.jpg" alt="Arduino MKR Vidor 4000" width="400">
       <br>
       <br>
       <p>Um den FPGA zu programmieren, benutze ich Verilog, ich bin zwar über die Hochschule auch mit VHDL vertraut aber ich finde den Syntax von Verilog wesentlich besser und ich mag die Nähe zur C Programmiersprache. Ich habe das Programm für den FPGA auf mehrere Module aufgeteilt:</p>
@@ -91,7 +90,7 @@
       <p>Die Basis der Anzeige ist der npxl_treiber. Dieses Modul ließt den 24Bit Farbcode LED für LED ein und zeigt ihn an, ist das Ende des Streifens errecht wird die Datenleitung für 50µs auf Null gesetzt um die Daten in den LEDs zu bestätigen. Im inneren des Moduls läuft eine Automatenkonstrukt, das das lesen und senden der einzelnen Bits koordiniert.</p>
       <br>
       <br>
-      <img src="" alt="Datenblatt WS2812B">
+      <iframe src="../img/ws2812b_datasheet.pdf" width="1000" height="800">Datenblatt WS2812B</iframe>
       <br>
       <br>
       <p>Der npxl_controller importiert den npxl_treiber und ein ROM Modul. Die Außführung dieses Modul kann sich in der Zukunft noch ändert, aber in seiner jetzigen Form ließt es einen Höhenwert ein (also den Pegel der Musik) und lässt von unten hoch dementsprechend viele LEDs mit einer festen Farbe leuchten, während es die LEDs darüber ausschaltet. So habe ich meine Pegelanzeige für die FFT Megafunktion. Die Farbdaten werden von dem ROM gelesen.</p>
@@ -100,7 +99,7 @@
       <p>Das uart_rx Modul ist dafür zuständig die Samples vom Mikrocontroller zu empfangen und über ein Register zur FFT Megafunktion weiterzuleiten. Das Programm für UART ist eigentlich relativ einfach aufgebaut, was man gar nicht erwarten würde. Wenn es das UART Startbit erkennt erwartet es 8 Datenbits und prüft dann ob ein Stopbit gesendet wurde um die Übertragung zu bestätigen. Wenn das geschehen ist liegen die Daten am Ausgangsregister an und ein data-valid Signal wird gesetzt.</p>
       <br>
       <br>
-      <img src="" alt="UART Protokoll">
+      <img src="../img/uart_protokoll.png" alt="UART Protokoll">
       <br>
       <br>
       <p>Jetzt kommt das FFT Modul. Ersteinmal möchte ich ein großes Lob an Gisselquist aussprechen, der den eigentlichen FFT Kern entworfen hat und auf GitHub einen Generator für angepasste FFT Kerne zu Verfügung stellt. Auf seiner Webseite ist der Aufbau und die Funktionsweise des Kerns exellent beschrieben und ich bin froh, dass ich das Projekt gefunden habe. Ein Link zur seiner Seite ist unten. Aber nun zum Technischen. Das FFT Modul, das ich programmiert habe ist ein Wrapper um den FFT Kern herum, damit ich ein gewisses Maß an Flowcontroll mit dem Kern habe und dass ich ihn in einer Burst Konfiguration benutzen kann, weil der eigentliche Kern eine Pipeline hat. Einfach ausgedrückt: Der Kern selbst erwartet eine gewisse Anzahl an Samples und rechnet kontinuierlich ab dem ersten Sample.</p>

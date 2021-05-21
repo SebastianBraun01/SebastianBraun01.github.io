@@ -5,8 +5,14 @@ const c = canvas.getContext('2d');
 
 
 // Canvas einstellungen ===========================================================================
-canvas.width = window.innerWidth / 2;
+if(window.innerWidth > 1200) canvas.width = 1000;
+else canvas.width = window.innerWidth - 200;
 canvas.height = 450;
+
+window.onresize = () => {
+  if(window.innerWidth > 1200) canvas.width = 1000;
+  else canvas.width = window.innerWidth - 200;
+}
 
 
 // Funktionen =====================================================================================

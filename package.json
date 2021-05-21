@@ -3,8 +3,7 @@
   "version": "1.0",
   "author": "Sebastian Braun",
   "scripts": {
-    "prepare": "cp ./node_modules/animejs/lib/anime.min.js ./js/",
-    "build": "tsc; parcel build --out-dir ./js/out/ ./js/script.js"
+    "build": "parcel build --out-dir ./ts/out/ ./ts/*.ts"
   },
   "dependencies": {
     "animejs": "^3.2.1"
