@@ -17,7 +17,7 @@
 
     <nav>
       <li class="nav-link"><a class="link-text" href="../index.html">Home</a></li>
-      <li class="nav-link"><a class="link-text" href="#" id="dropdown"><span id="dropdown_arrow">˃</span>Projekte</a></li>
+      <li class="nav-link"><a class="link-text" href="#" id="dropdown"><span id="dropdown_icon">+</span>Projekte</a></li>
       <li class="nav-link"><a class="link-text" href="../pages/übermich.html">Über mich</a></li>
       <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank"><img src="../img/github-logo.png" width="40"><span>GitHub</span></a></li>
     </nav>
@@ -45,6 +45,10 @@
       <p>Die LED Matrix gehört technisch gesehen, noch zu meinem anderen Projekt, der LED Beleuchtung, hat aber mitlerweile eine solche komplexität erreicht, dass es sinnvol ist sie hier nochmal ausführlich zu beschreiben. Die LED Matrix wird ein tolles Gimmik für unseren Partykeller, unzwar ein riesiger Audio Spektrograph. Die Steuerung der Matrix wird dann mit dem Mischpult unserer Surround-Anlage verbunden und zeigt in verschiedenen Formen und Farben das Frequenzspektrum der Musik.</p>
       <br>
       <br>
+      <h1>Hardware</h1>
+      <div class="break"></div>
+      <br>
+      <br>
       <p>Matrix wird noch gebaut (to be continued).</p>
       <br>
       <br>
@@ -52,7 +56,10 @@
       <img src="" alt="Bild der Verkabelung">
       <br>
       <br>
-      <p>Nun zur Steuerung, dem komplizierten Teil. Ursprünglich ich die LED Matrix auch nur mit einem normalen Arduino betreiben. Dafür habe ich von Adafruit eine FFT Bibliothek gefunden. Der "Fast Fourier Transform (FFT)" ist ein mathematischer Algorythmus, mit dem ein Computer oder Mikrocontroller aus den Messpunkten des Zeitsignal der Musik ein Frequenzspektrum berechnen kann, für mich also die charakteristischen Balken, die die Anteile hohen und tiefen Töne in der Musik anzeigen (auf den FFT Algorythmus möchte ich in einem anderen Artikel noch genauer eingehen, die Projektbeschreibung wird hier so schon noch lang genug).</p>
+      <p>======== Audio sampling ========</p>
+      <br>
+      <br>
+      <p>Nun zur Steuerung, dem komplizierten Teil. Ursprünglich ich die LED Matrix auch nur mit einem normalen Arduino betreiben. Dafür habe ich von Adafruit eine FFT Bibliothek gefunden. Der "Fast Fourier Transform (FFT)" ist ein mathematischer Algorythmus, mit dem ein Computer oder Mikrocontroller aus den Messpunkten des Zeitsignal der Musik ein Frequenzspektrum berechnen kann, für mich also die charakteristischen Balken, die die Anteile der hohen und tiefen Töne in der Musik anzeigen (auf den FFT Algorythmus möchte ich in einem anderen Artikel noch genauer eingehen, die Projektbeschreibung wird hier so schon noch lang genug).</p>
       <br>
       <br>
       <p>Der Arduino sollte also die Messpunkte mit dem integrierten AD Wandler aufnehmen, diese mit dem FFT Algorythmus verarbeiten und das Ergebnis auf der Matrix ausgeben. Dafür habe ich einen kleinen Prototypen gebaut. Dieser hat auch perfekt funktioniert.</p>
@@ -61,13 +68,17 @@
       <video src="../img/uv_prototyp.mp4" muted preload controls width="700"></video>
       <br>
       <br>
-      <p>Diese Herangehensweise hat nur einen Haken. Je größer die Matrix wird, desto langsamer wird die ganze Rechnerei im Mikrocontroller, weil die Berechnungen und das Ansteuern der Matrix zeit brauchen und nicht parallel ablaufen können. Mit diesem kleinen Prototypen funktioniert noch alles einwandfrei, aber wenn ich die Steuerung an die große Matrix hänge, wird das nur noch eine Diashow.</p>
+      <p>Diese Herangehensweise hat nur einen Haken. Je größer die Matrix wird, desto langsamer wird die ganze Rechnerei im Mikrocontroller, weil die Berechnungen und das Ansteuern der Matrix Zeit brauchen und nicht parallel ablaufen können. Mit diesem kleinen Prototypen funktioniert noch alles einwandfrei, aber wenn ich die Steuerung an die große Matrix hänge, wird das nur noch eine Diashow.</p>
       <br>
       <br>
-      <p>Ein anderer Plan musste her und da bin ich auf FPGAs gekommen. Es gibt von Arduino nämlich den MKR Vidor 4000, ein Development Board auf dem ein Mikrocontroller (SAM21) und ein FPGA (Intel Cyclone 10) verbaut ist. Ein FPGA ist ideal für dieses Projekt, da ich alle Aufgaben (außer das samplen mit dem ADC) auf dem FPGA parallel betreiben und wie eine Pipeline behandeln kann und das mit einem noch viel höhren Takt. Das ist vor allem für die Ansteuerung der Matrix wichtig, da ich jetzt nicht einen großen Streifen ansteuern muss, der die Matrix bildet, sondern ich kann jetzt für jede einzelne Spalte der Matrix, einen seperaten Streifen benutzen und diese alle komplett parallel ansteuern und das mit bis zu 200MHz (ist ein bischen übertrieben, aber möglich 😎). Auf dem Arduino gibt es ein 24MHz Taktsignal für den FPGA, das hat bis jetzt für alles einwandfrei funktioniert.</p>
+      <p>Ein anderer Plan musste her und da bin ich auf FPGAs gekommen. Es gibt von Arduino nämlich den MKR Vidor 4000, ein Development Board auf dem ein Mikrocontroller (SAM21) und ein FPGA (Intel Cyclone 10) verbaut ist. Ein FPGA ist ideal für dieses Projekt, da ich alle Aufgaben (außer das samplen mit dem ADC) auf dem FPGA parallel betreiben und wie eine Pipeline behandeln kann und das mit einem noch viel höhren Takt. Das ist vor allem für die Ansteuerung der Matrix wichtig, da ich jetzt nicht einen großen Streifen ansteuern muss, der die Matrix bildet, sondern ich kann jetzt für jede einzelne Spalte der Matrix, einen seperaten Streifen benutzen und diese alle komplett parallel ansteuern und das mit bis zu 200MHz (ist ein bischen übertrieben, aber möglich 😎). Auf dem Arduino gibt es ein 24MHz Taktsignal für den FPGA, dieses hat bis jetzt für die Berechnungen gereicht.</p>
       <br>
       <br>
       <img src="../img/vidor.jpg" alt="Arduino MKR Vidor 4000" width="400">
+      <br>
+      <br>
+      <h1>Software</h1>
+      <div class="break"></div>
       <br>
       <br>
       <p>Um den FPGA zu programmieren, benutze ich Verilog, ich bin zwar über die Hochschule auch mit VHDL vertraut aber ich finde den Syntax von Verilog wesentlich besser und ich mag die Nähe zur C Programmiersprache. Ich habe das Programm für den FPGA auf mehrere Module aufgeteilt:</p>
@@ -87,34 +98,69 @@
       <img src="" alt="Diagramm vom Programmaufbau">
       <br>
       <br>
-      <p>Die Basis der Anzeige ist der npxl_treiber. Dieses Modul ließt den 24Bit Farbcode LED für LED ein und zeigt ihn an, ist das Ende des Streifens errecht wird die Datenleitung für 50µs auf Null gesetzt um die Daten in den LEDs zu bestätigen. Im inneren des Moduls läuft eine Automatenkonstrukt, das das lesen und senden der einzelnen Bits koordiniert.</p>
+      <h1>Neopixel Treiber</h1>
+      <div class="break"></div>
+      <br>
+      <br>
+      <p>Die Basis der Anzeige ist der npxl_treiber. Dieses Modul ließt den 24Bit Farbcode LED für LED ein und zeigt ihn an, ist das Ende des Streifens errecht wird die Datenleitung für 50µs auf Null gesetzt um die Daten in den LEDs zu bestätigen. Im inneren des Moduls läuft eine Automatenkonstrukt, das das lesen und senden der einzelnen Bits koordiniert.<br>
+      Wird der die send-Leitung aktiviert, legt der Block eine Speicheradresse an, die der LED entspricht, deren Daten der Block braucht. Die Farbdaten, die am Eingang anliegen werden in ein Puffer-Register eingelesen. In der Definition des Blocks im Parent-Modul wird dem Block fest vorgegeben, wie viele LEDs er abarbeiten muss.</p>
+      <br>
+      <br>
+      <p>Nun looped der Block über die Speicheradressen und gibt deren Inhalt an die LED-Streifen aus. Für jedes Bit, das ausgegeben wird, gibt es timing Bedingungen, die bestimmen ob eine 1 oder 0 gesendet wird. Diese Zeiten können dem Datenblatt entnommen werden.<br>
+      Fürs erste wird an den Treiberblock nur ein ROM angeschlossen sein, das feste Farbdaten enthält, aber zulässt, dass nur LEDs bis zu einer bestimmten Höhe erleuchtet werden.</p>
+      <br>
+      <br>
+      <img src="" alt="Blockdarstellung vom npxl_treiber">
       <br>
       <br>
       <iframe src="../img/ws2812b_datasheet.pdf" width="1000" height="800">Datenblatt WS2812B</iframe>
       <br>
       <br>
-      <p>Der npxl_controller importiert den npxl_treiber und ein ROM Modul. Die Außführung dieses Modul kann sich in der Zukunft noch ändert, aber in seiner jetzigen Form ließt es einen Höhenwert ein (also den Pegel der Musik) und lässt von unten hoch dementsprechend viele LEDs mit einer festen Farbe leuchten, während es die LEDs darüber ausschaltet. So habe ich meine Pegelanzeige für die FFT Megafunktion. Die Farbdaten werden von dem ROM gelesen.</p>
+      <h1>Neopixel Controller</h1>
+      <div class="break"></div>
       <br>
       <br>
-      <p>Das uart_rx Modul ist dafür zuständig die Samples vom Mikrocontroller zu empfangen und über ein Register zur FFT Megafunktion weiterzuleiten. Das Programm für UART ist eigentlich relativ einfach aufgebaut, was man gar nicht erwarten würde. Wenn es das UART Startbit erkennt erwartet es 8 Datenbits und prüft dann ob ein Stopbit gesendet wurde um die Übertragung zu bestätigen. Wenn das geschehen ist liegen die Daten am Ausgangsregister an und ein data-valid Signal wird gesetzt.</p>
+      <p>Der npxl_controller importiert den npxl_treiber und ein ROM Modul. Die Außführung dieses Modul kann sich in der Zukunft noch ändert, aber in seiner jetzigen Form ließt es einen Höhenwert ein (also den Pegel der Musik) und lässt von unten hoch dementsprechend viele LEDs mit einer festen Farbe leuchten, während es die LEDs darüber ausschaltet. So habe ich meine Pegelanzeige für die FFT Megafunktion. Die Farbdaten werden von dem ROM gelesen. Ist die Höhe erreicht, die ich anzeigen will, wird der Adresse des npxl_treiber ein Offset hinzugefügt, das den Block einen anderen Adressraum des ROMs lesen lässt, wo nur Nullen drinstehen, also die LEDs ausschalten.</p>
+      <br>
+      <br>
+      <img src="" alt="Blockdarstellung vom npxl_controller">
+      <br>
+      <br>
+      <h1>UART RX Modul</h1>
+      <div class="break"></div>
+      <br>
+      <br>
+      <p>Das uart_rx Modul ist dafür zuständig die Samples vom Mikrocontroller zu empfangen und über ein Register zur FFT Megafunktion weiterzuleiten. Das Programm für UART ist eigentlich relativ einfach aufgebaut, was man zuerst nicht erwarten würde. Wenn es das UART Startbit erkennt erwartet es 8 Datenbits und prüft dann ob ein Stopbit gesendet wurde um die Übertragung zu bestätigen. Wenn das geschehen ist liegen die Daten am Ausgangsregister an und ein data-valid Signal wird gesetzt. Intern wird die Koordination dieser Schritte über ein Automatenkonstrukt geregelt.</p>
       <br>
       <br>
       <img src="../img/uart_protokoll.png" alt="UART Protokoll">
       <br>
       <br>
-      <p>Jetzt kommt das FFT Modul. Ersteinmal möchte ich ein großes Lob an Gisselquist aussprechen, der den eigentlichen FFT Kern entworfen hat und auf GitHub einen Generator für angepasste FFT Kerne zu Verfügung stellt. Auf seiner Webseite ist der Aufbau und die Funktionsweise des Kerns exellent beschrieben und ich bin froh, dass ich das Projekt gefunden habe. Ein Link zur seiner Seite ist unten. Aber nun zum Technischen. Das FFT Modul, das ich programmiert habe ist ein Wrapper um den FFT Kern herum, damit ich ein gewisses Maß an Flowcontroll mit dem Kern habe und dass ich ihn in einer Burst Konfiguration benutzen kann, weil der eigentliche Kern eine Pipeline hat. Einfach ausgedrückt: Der Kern selbst erwartet eine gewisse Anzahl an Samples und rechnet kontinuierlich ab dem ersten Sample.</p>
+      <h1>FFT Megafunktion</h1>
+      <div class="break"></div>
       <br>
       <br>
-      <p>Mit meinem Design außenrum wartet er nun bis er alle Samples hat, rechnet dann alles durch und gibt dann das komplette Ergebnis aus bevor er neue Samples empfangen kann, er rechnet also immer Etappenweise oder in Burst Konfiguration. Zusätzlich hat er noch Signale, die anzeigen wann er rechnet und wann Daten geschrieben und gelesen werden können und schon habe ich ein FFT Modul perfekt für mein Projekt.</p>
+      <p>Jetzt kommt das FFT Modul. Ersteinmal möchte ich ein großes Lob an Gisselquist aussprechen, der den eigentlichen FFT Kern entworfen hat und auf GitHub einen Generator für angepassbare FFT Kerne zu Verfügung stellt. Auf seiner Webseite ist der Aufbau und die Funktionsweise des Kerns exellent beschrieben und ich bin froh, dass ich das Projekt gefunden habe. Ein Link zur seiner Seite ist unten. Aber nun zum Technischen. Das FFT Modul, das ich programmiert habe ist ein Wrapper um den FFT Kern herum, damit ich ein gewisses Maß an Flowcontroll mit dem Kern habe und dass ich ihn in einer Burst Konfiguration benutzen kann, weil der eigentliche Kern als eine Pipeline ausgelegt ist. Einfach ausgedrückt: Der Kern selbst erwartet eine gewisse Anzahl an Samples und rechnet kontinuierlich ab dem ersten Sample.</p>
       <br>
       <br>
-      <img src="" alt="Aufbau FFT Modul">
+      <p>Mit meinem Design wiederum wartet er nun bis er alle Samples für eine Berechnung hat (momentan 512), rechnet dann alles durch und gibt dann das komplette Ergebnis aus bevor er neue Samples empfangen kann, er rechnet also immer Etappenweise oder in einer Burst Konfiguration. Zusätzlich hat er noch Signale, die anzeigen wann er rechnet und wann Daten geschrieben und gelesen werden können. Als Input nimmt der Block 8 Bit breite Datensamples für jewails die Realen und Komplexen Werte, also 16 Bit. Die Komplexen Werte sind für meine Anwendung nicht relevant, da ich keine genauen Rechenwerte erzielen will, sondern nur einen tollen Effekt zur Musik.</p>
       <br>
       <br>
-      <p>Das spektrometer Modul fügt alle anderen Bausteine zusammen und ist das Modul, das dann letztendlich auf den FPGA kommt. Alle Module koordinieren sich untereinander mit Ready- und Startsignalen.</p>
+      <img src="" alt="Blockdarstellung vom FFT Modul">
       <br>
       <br>
-      <p>Das war jetzt eine ganz schöne Wand von Text. Ich hoffe das Projekt findet ein bischen Aufmerksamkeit auf GitHub und ich freue mich über Kommentare und Verbesserungsvorschläge. Das Repository ist unten verlinkt.</p>
+      <h1>Spektrometer</h1>
+      <div class="break"></div>
+      <br>
+      <br>
+      <p>Das spektrometer Modul fügt alle Bausteine zusammen und ist das Modul, das letztendlich auf den FPGA geflasht wird. Alle Module koordinieren sich untereinander mit Ready- und Startsignalen. Zwischen dem Output der FFT Funktion und den Eingängen der npxl_controller befindet sich noch ein Verteiler, der einen Datensatz einließt und diesem ausgewählte Punkte entnimmt, die auf der Matrix angezeigt werden sollen, denn meine Matrix hat eine Breite von 32 Streifen und ich habe 512 Datenpunkte.</p>
+      <br>
+      <br>
+      <h1>Sourcecode</h1>
+      <div class="break"></div>
+      <br>
+      <br>
+      <p>Das war jetzt eine ganz schöne Wand von Text. Ich hoffe das Projekt findet ein bischen Aufmerksamkeit auf GitHub und ich freue mich über Kommentare und Verbesserungsvorschläge. Das Repository ist unten verlinkt zusammen mit der Seite von Gisselquist. Schaut unbedingt mal auf seine Seite. Er hat den FFT Algorythmus ausführlich und verständlich erklärt.</p>
     </section>
 
     <section id="Links">

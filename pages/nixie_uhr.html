@@ -17,7 +17,7 @@
 
     <nav>
       <li class="nav-link"><a class="link-text" href="../index.html">Home</a></li>
-      <li class="nav-link"><a class="link-text" href="#" id="dropdown"><span id="dropdown_arrow">˃</span>Projekte</a></li>
+      <li class="nav-link"><a class="link-text" href="#" id="dropdown"><span id="dropdown_icon">+</span>Projekte</a></li>
       <li class="nav-link"><a class="link-text" href="../pages/übermich.html">Über mich</a></li>
       <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank"><img src="../img/github-logo.png" width="40"><span>GitHub</span></a></li>
     </nav>
@@ -45,6 +45,10 @@
       <p>Ein klassiker für jeden Elektronik Hobbybastler. Und ich wollte mir auch eine bauen, weil Nixies einfach coll aussehen. Das war so ein Projekt, das ich ewigen Zeiten mal angefangen habe aber nie fertiggestellt hab. Jetzt aber arbeite ich daran, dass die Uhr endlich mal fertig wird und alle Schaltpläne und Programme kommen auf GitHub und ich will das Projekt auf meiner Webseite dokumentieren.</p>
       <br>
       <br>
+      <h1>Hardware</h1>
+      <div class="break"></div>
+      <br>
+      <br>
       <p>Die erste Frage ist: wie betreibe ich am besten die Nixie Röhren? Die Nixies, die ich verwende haben eine Zündspannung von 180V und eine Brennspannung von 150V mit einem Anodenstrom von 2mA. Ich brauche also ein Netzteil mit 180V DC. Die erstbeste Möglichkeit wäre, Netztspannung auf 180V RMS runter zu transformieren und dann gleichzurichten. Das wäre an sich auch echt simpel, der Nachteil ist nur dass ich dann einen riesigen Trafo am der Uhr hängen hätte und da ich eine freistehende Platine haben will, wäre das Sicherheitstechnisch mit der Netzspannung nicht die beste Idee. Mein Plan ist also ein 12V auf 180V DC-DC-Wandler zu entwerfen.</p>
       <br>
       <br>
@@ -61,11 +65,19 @@
       <p>Netzteil hat einwandfrei funktioniert also habe ich den Schaltplan des Netzteils auf die Nixie Uhr Platine kopiert und die komplette Platine fertig entworfen. Jetzt kommt die Frage wie ich die einzelnen Pins der Nixies am besten schalte, denn jede Ziffer hat eine eigene Kathode. Eine Möglichkeit währen MOSFETs für jeden Pin, aber das währen 60 MOSFETs für alle 6 Röhren und um Gotteswillen das mach ich nicht. Dann gäbe es noch spezielle Treiberchips: entweder die traditionellen 74LS141, speziell für Nixie Röhren oder ein Latch-Array das für hohe Spannungen ausgelegt ist. Ich hab mir 6 von den 74LS141 bestellt. Im Endeffekt sind diese nur BCD auf Dezimal Umsetzer für Nixie Röhren. Soweit so gut. Jetzt hab ich aber immer noch 24 Pins zu schalten. Damit der Arduino alle pins schalten kann (und ja ich benutze einen Arduino zur Steuerung), kann ich ganz einfach 3 8-Bit Schieberegister benutzen, ganz normale 74HC595.</p>
       <br>
       <br>
+      <h1>Software</h1>
+      <div class="break"></div>
+      <br>
+      <br>
       <p>Kleine Anmerkung: Ich habe unter jeder Röhre noch eine kleiene Blaue LED plaziert. Das wird bei Nixie Uhren öfter gemacht, weil das blaue Licht im Kontrast mit dem warmen orangen Leuchten der Nixie Röhren einen tollen Effekt erzielt.</p>
-      <p>Nun zum Programm. Das Programm ist recht simpel. Der interne RTC des Arduino hält die aktuelle Zeit und diese muss ich nur noch über die Schieberegister richtig formatiert ausgeben. Sonst benutze ich nur noch die Blynk Bibliothek, um mit meinem Handy, die Röhren und die blaue Beleuchtung ein und ausschaltung zu können und um die Uhrzeit zu stellen. Die Blynk Bibliothek habe ich in meinem LED Beleuchtungs Projekt genauer erklärt.</p>
+      <p>Nun zum Programm. Das Programm ist recht simpel. Der interne RTC des Arduino hält die aktuelle Zeit und diese muss ich nur noch über die Schieberegister richtig formatiert ausgeben. Sonst benutze ich nur noch die Blynk Bibliothek, um mit meinem Handy die Röhren und die blaue Beleuchtung ein- und ausschalten zu können und um die Uhrzeit zu stellen. Die Blynk Bibliothek habe ich in meinem LED Beleuchtungs Projekt genauer erklärt.</p>
       <br>
       <br>
       <img src="" alt="Bild von der App">
+      <br>
+      <br>
+      <h1>Sourcecode</h1>
+      <div class="break"></div>
       <br>
       <br>
       <p>Soweit gibts eigendlich nichts mehr zum Projekt zu sagen. Ich freue mich über Kommentare und Verbesserungsvorschläge. Das Repository mit dem Code und dem Schaltplan ist unten verlinkt. Ich habe noch einen Link zu Seite von Dalibor Farny dazugepackt. Er stellt eigenhändig Nixie Röhren her, die einfach nur sexy aussehen. Ich habe momentan andere Röhren in meiner Uhr verbaut, aber ich habe irgendwann auf jeden Fall vor, auf diese Röhren abzugraden (aber nicht jetzt, die sind nämlich echt teuer).</p>

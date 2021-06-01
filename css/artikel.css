@@ -24,6 +24,12 @@ main {
   align-items: center;
 }
 
+#Beschreibung h1 {
+  font-size: 2rem;
+  align-self: flex-start;
+  padding-top: 50px;
+}
+
 #Beschreibung p {
   font-size: 1.2rem;
 }
@@ -56,4 +62,10 @@ main {
   background-color: var(--hintergrund_dunkel);
   border: var(--text_hover) solid 2px;
   transition-duration: 200ms;
+}
+
+.break {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid var(--text_hell);
 }

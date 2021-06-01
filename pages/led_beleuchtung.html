@@ -17,7 +17,7 @@
 
     <nav>
       <li class="nav-link"><a class="link-text" href="../index.html">Home</a></li>
-      <li class="nav-link"><a class="link-text" href="#" id="dropdown"><span id="dropdown_arrow">˃</span>Projekte</a></li>
+      <li class="nav-link"><a class="link-text" href="#" id="dropdown"><span id="dropdown_icon">+</span>Projekte</a></li>
       <li class="nav-link"><a class="link-text" href="../pages/übermich.html">Über mich</a></li>
       <li class="nav-link"><a class="link-text" href="https://github.com/SebastianBraun01" target="_blank"><img src="../img/github-logo.png" width="40"><span>GitHub</span></a></li>
     </nav>
@@ -45,11 +45,15 @@
       <p>Meine Freunde, mein Bruder und ich haben uns zu Hause einen Raum im Keller eingerichtet, wo wir treffen und Musik hören können. Ich wollte den Raum mit LED Streifen ausstatten, die ein paar Lichteffekte abspielen und sich wahlweise auch mit der Musik syncronisieren.</p>
       <br>
       <br>
-      <p>Für die LED Streifen habe ich für die WS2812B entschieden, oder auch Neopixel, wie Adafruit wirbt. Dies sind digitale LEDs, deren Farbe frei programmierbar ist und die sich kaskadieren lassen. Dadurch lassen sich alle möglichen Farbmuster anzeigen, im gegensatz zu konventionellen RGB LEDs.
+      <h1>Hardware</h1>
+      <div class="break"></div>
+      <br>
+      <br>
+      <p>Für die LED Streifen habe ich für die WS2812B entschieden, oder auch Neopixel, wie Adafruit wirbt. Dies sind digitale LEDs, deren Farbe frei programmierbar ist und die sich kaskadieren lassen. Dadurch lassen sich alle möglichen Farbmuster anzeigen, im gegensatz zu konventionellen RGB LEDs.<br>
       Es braucht jedoch einen Mikrocontroller oder eine andere Steuerung, um die LEDs zu bedienen. Dafür nehme ich einen Arduino Nano 33 IOT. Das gibt mir einerseits den Vorteil, dass ich keine aufwendigen Funktionen für die Neopxiel selber schreiben muss, da Adafruit eine Bibliothek für Arduino anbietet und andererseits kann ich über die WLAN die Steuerungen für die einzelnen Streifen untereinander syncronisieren, damit alle Lichteffekte perfekt gleich angezeigt werden. Außerdem kann ich dann die Beleuchtung mit meinen Handy steuern (näheres später 😏).</p>
       <br>
       <br>
-      <p>Jeder einzelne Streifen bekommt eine Steuerung. Das ist einfach eine Platine mit dem Arduino und den weiteren passiven Komponenten. Für die Platinen mach ich noch ein kleines Gehäuse mit meinem 3D Drucker. Den Schaltplan und die Dateien für das Gehäuse kann man in meinem GitHub Repository finden.</p>
+      <p>Jeder einzelne Streifen bekommt eine Steuerung. Das ist einfach eine Platine mit dem Arduino und den weiteren passiven Komponenten. Einen Kondensator als Puffer für Stromspitzen und der Widerstand schützt die Datenleitung der LEDs. Für die Platinen mach ich noch ein kleines Gehäuse mit meinem 3D Drucker. Den Schaltplan und die Dateien für das Gehäuse kann man in meinem GitHub Repository finden.</p>
       <br>
       <br>
       <img src="../img/led_schaltung.png" alt="Bild Schaltplan" width="1000">
@@ -57,16 +61,29 @@
       <img src="" alt="Bild vom Gehäuse">
       <br>
       <br>
-      <p>Nun zum Programmcode. Wie ich oben schon erwähnt habe, gibt es für die LED Streifen eine Bibliothek für Arduino. Darüber hinaus habe ich für die Steuerung die Blynk IOT Platform gefunden, der Arduino und mein Handy verbinden sich mit einem Server und können untereinander Informationen austauschen. Ich kann also mit dem Handy Befehler an die LED Streifen senden und deren Status auslesen. Außerdem syncronisieren so die einzelnen Streifen ihre Lichteffekte. Außerdem werde ich noch einen Arduino plazieren, der mit dem Mischpult der Surround Anlage verbunden ist und konstant die Lautstärkedaten ins Netzwerk sendet, sodas ich die Möglichkeit habe Lichteffekte zu programmieren, die sich mit der Musik syncronisieren.</p>
+      <h1>Software</h1>
+      <div class="break"></div>
       <br>
       <br>
-      <p>Auf meinem Handy kann ich die App von Blynk installieren und die Steuerungselemente anpassen. Es gibt eine Reihe von coolen Controllblöcken und deren Funktionen sind auf der Documentation Seite von Blynk beschrieben. Ich muss nur noch die Arduinos, die ich für das Projekt verwende in der App registrieren. Dann bekomme ich die Geräte-IDs, die ich in die Programme der Arduinos eintrage, damit klar ist wer mit wem kommuniziert. Wenn das getan ist und sich alle mit dem WLAN verbunden haben, kann man nun mit dem Handy die Lichteffekte auswählen, die Helligkeit der LEDs ändern, die Farbe bei einfarbigen Effekten auswählen und die Effekt Geschwindigkeit einstellen und bekommt immer eine Bestätigung auf dem Terminal auf dem Handy.</p>
+      <p>Nun zum Programmcode. Wie ich oben schon erwähnt habe, gibt es für die LED Streifen eine Bibliothek für Arduino. Darüber hinaus habe ich für die Steuerung die Blynk IOT Platform gefunden, der Arduino und mein Handy verbinden sich mit einem Server und können untereinander Informationen austauschen. Ich kann also mit dem Handy Befehle an die LED Streifen senden und deren Status auslesen.<br>
+      Außerdem syncronisieren so die einzelnen Streifen ihre Lichteffekte. Dafür werde ich noch einen Arduino plazieren, der mit dem Mischpult der Surround Anlage verbunden ist und konstant die Lautstärkedaten ins Netzwerk sendet, sodas ich die Möglichkeit habe Lichteffekte zu programmieren, die sich mit der Musik syncronisieren.</p>
+      <br>
+      <br>
+      <p>Das Programm besteht aus den einzelnen auswählbaren Lichteffekten und den Callbacks der Blynk Bibliothek, die zwischen den einzelnen Modi umschalten können und Farbe, Helligkeit und Effekt-Geschwindigkeit einstellen.</p>d
+      <br>
+      <br>
+      <p>Auf meinem Handy kann ich die App von Blynk installieren und die Steuerungselemente anpassen. Es gibt eine Reihe von coolen Controllblöcken und deren Funktionen sind auf der Documentation Seite von Blynk beschrieben. Ich muss nur noch die Arduinos, die ich für das Projekt verwende in der App registrieren. Dann bekomme ich die Geräte-IDs, die ich in die Programme der Arduinos eintrage, damit klar ist wer mit wem kommuniziert.<br>
+      Wenn das getan ist und sich alle mit dem WLAN verbunden haben, kann man nun mit dem Handy die Lichteffekte auswählen, die Helligkeit der LEDs ändern, die Farbe bei einfarbigen Effekten auswählen und die Effekt Geschwindigkeit einstellen und bekommt immer eine Bestätigung auf dem Terminal auf dem Handy.</p>
       <br>
       <br>
       <img src="../img/blynk_app.png" alt="Screenshot der App" width="400">
       <br>
       <br>
-      <p>Das Repository mit dem Programmcode ist unten verlinkt. Ich empfehle einfach mal reinzuschauen, ich freue mich über Kommentare und Verbesserungsvorschläge. Ich habe auch noch andere Projekte die man sich anschauen kann. Insbesondere das Projekt LED-Matrix hat auch mit diesem hier zu tun.</p>
+      <h1>Sourcecode</h1>
+      <div class="break"></div>
+      <br>
+      <br>
+      <p>Das Repository mit dem Programmcode ist unten verlinkt. Ich empfehle einfach mal reinzuschauen, ich freue mich über Kommentare und Verbesserungsvorschläge. Ich habe auch noch andere Projekte die man sich anschauen kann. Insbesondere das Projekt LED-Matrix ist auch teil der ganzen Kellerbeleuchtung und ist für alle interessant, die mal Projekte mit FPGAs angehen wollen.</p>
     </section>
 
     <section id="Links">
