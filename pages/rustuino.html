@@ -45,16 +45,27 @@
       <p>Ich wollte mir schon lange mal die Programmiersprache Rust anschauen. Zu der Zeit haben wir in Mikrocomputertechnik an der Hochschule besprochen, wie man auf Registerebene die Peripherie in einem Mikrocontroller benutzen kann. Ich der Hochschule haben wir dafür Assembly benutzt. Ich wollte aber nebenbei, die Sachen die wir gelernt haben auch in Rust umsetzen.</p>
       <br>
       <br>
+      <h1>Was ist Rust?</h1>
+      <div class="break"></div>
+      <br>
+      <br>
       <p>Rust ist eine vergleichbar junge Programmiersprace, die mit C/C++ als Systemlevel Programmiersprache konkuriert. Das bedeutet, dass sich viele Infrastrukturen für Rust, wie GUI-, Embedded- und Netzwerkprogrammierung erst noch richtig entwickeln müssen. Trotzdem gibt es einen richtigen Hype um Rust, was man einmal daran sieht, dass gerade auf allen Seiten an Projekten geschraubt wird, um die Vielseitigkeit von Rust zu verbessern und auf der anderen Seite schreiben gerade eine kleine Armee von Enthusiasten die Linux Core Utilities in Rust neu und veröffentlichen sie auf GitHub, was is irgendwie cool finde (ich wette mit euch, irgendwann sehen wir einen kompletten Linux Kernel in Rust).</p>
       <br>
       <br>
-      <p>Ich habe mir jetzt einfach mal den Embedded Bereich vorgenommen, weil der mich am meisten interessiert und weil das mein Spezialgebiet ist, wenn ich das so sagen darf. Wie gesagt, steckt die Embedded Entwicklung (spiziefisch mit Mikrocontrollern) mit Rust noch in den Kinderschuhen, aber zumindest stehen für viele STM32 Mikrocontroller schon HALs (Hardware Abstraction Layers) bereit und Rust Binaries lassen sich schon ohne Runtime kompilieren, die grundlegenden Bausteine sind also schon da.</p>
+      <h1>Was hab ich vor?</h1>
+      <div class="break"></div>
       <br>
       <br>
-      <p>Mein Plan ist eine Bibliothek für Rust zu erstellen, die den Funktionsumfang eines Mikrocontrollers Abstrahiert und Vereinfachte Funktionene für die Benutzung zur Verfügung stellt aber trotzdem den Registerzugriff zuläst, wenn nötig. Zudem soll die Bibliohtek für möglichst viele Mikrocontroller Familien funktionieren und das mit möglichst wenig engestelle. Ich mache also quasi ein Framework wie Arduino, nur für Rust. Damit kann ich weiter lernen, wie die Peripherie in einem Mikrocontroller funktioniert und der Embedded Umgebung von Rust ein bischen helfen.</p>
+      <p>Ich habe mir jetzt einfach mal den Embedded Bereich vorgenommen, weil der mich am meisten interessiert und weil das mein Spezialgebiet ist, wenn ich das so sagen darf. Wie gesagt, steckt die Embedded Entwicklung (spiziefisch mit Mikrocontrollern) mit Rust noch in den Kinderschuhen, aber zumindest stehen für viele STM32 Mikrocontroller schon Registermaps bereit, die aus den SVG Dateien des Chiphersteller generiert werden und Rust Binaries lassen sich schon ohne Runtime kompilieren. Die grundlegenden Bausteine sind also schon da.</p>
+      <br>
+      <br>
+      <p>Mein Plan ist eine Bibliothek für Rust zu erstellen, die den Funktionsumfang eines Mikrocontrollers Abstrahiert und Vereinfachte Funktionen für die Benutzung zur Verfügung stellt aber trotzdem für den Fall der Fälle den direkten Registerzugriff noch zuläst. Zudem soll die Bibliohtek für möglichst viele Mikrocontroller Familien funktionieren und das mit möglichst wenig eingestelle. Ich mache also quasi ein Framework wie Arduino, nur für Rust. Damit kann ich weiter lernen kann, wie die Peripherie in einem Mikrocontroller funktioniert und der Embedded Infrastruktur von Rust ein bischen helfen kann.</p>
       <br>
       <br>
       <p>Außerdem ist mein Professor in Mikrocomputertechnik sehr an dem Projekt interessiert, und vielleicht kann ich ein offizielles Studentenprojekt anmelden, das an der Hochschule anerkannt wird und was mein Professor als Stoff für seinen Unterricht gebrauchen kann. Wenn ich weiteres weiß, schreib ich es hier mit rein.</p>
+      <br>
+      <br>
+      <p>Wenn es echte Fortschritte bei dem Projekt gibt, werd ich sie hier auch dokumentieren. Bis dahin könnt ihr euch schonmal die groben Anfänge in meinem GitHub Repository anschauen.</p>
       <br>
       <br>
       <p><!-- Doku --></p>
