@@ -53,10 +53,23 @@
       <br>
       <br>
       <img src="../img/matrix_konstruktion.png" alt="Bild der CAD Konstruktion" width="1200">
+      <br>
+      <br>
       <img src="" alt="Bild der Verkabelung">
       <br>
       <br>
-      <p>======== Audio sampling ========</p>
+      <h1>Audio Sampling</h1>
+      <div class="break"></div>
+      <br>
+      <br>
+      <p>Die Musik muss so vorbereitet werden, dass sie von den AD-Wandlern des Arduinos gemessen und verarbeitet werden kann. Der Arduino hat einen Messbereich von 0V bis 5V und kann keine negativen Spannungen messen. Der Klinkenstecker eines Handys schafft etwa ±150mV. Ich hab also einen Audio Verstärker entworfen, der die Spitzen von bis zu 150mV auf Spitzen von bis zu 2.5V verstärken kann und der Ausgangsspannung einen Grundanteil von 2.5V gibt. Somit bewegt sich die Spannung innerhalb und um den Mittelpunkt des Messbereiches.</p>
+      <br>
+      <br>
+      <img src="" alt="Verstärkerschaltung">
+      <br>
+      <br>
+      <h1>Software</h1>
+      <div class="break"></div>
       <br>
       <br>
       <p>Nun zur Steuerung, dem komplizierten Teil. Ursprünglich ich die LED Matrix auch nur mit einem normalen Arduino betreiben. Dafür habe ich von Adafruit eine FFT Bibliothek gefunden. Der "Fast Fourier Transform (FFT)" ist ein mathematischer Algorythmus, mit dem ein Computer oder Mikrocontroller aus den Messpunkten des Zeitsignal der Musik ein Frequenzspektrum berechnen kann, für mich also die charakteristischen Balken, die die Anteile der hohen und tiefen Töne in der Musik anzeigen (auf den FFT Algorythmus möchte ich in einem anderen Artikel noch genauer eingehen, die Projektbeschreibung wird hier so schon noch lang genug).</p>
@@ -75,10 +88,6 @@
       <br>
       <br>
       <img src="../img/vidor.jpg" alt="Arduino MKR Vidor 4000" width="400">
-      <br>
-      <br>
-      <h1>Software</h1>
-      <div class="break"></div>
       <br>
       <br>
       <p>Um den FPGA zu programmieren, benutze ich Verilog, ich bin zwar über die Hochschule auch mit VHDL vertraut aber ich finde den Syntax von Verilog wesentlich besser und ich mag die Nähe zur C Programmiersprache. Ich habe das Programm für den FPGA auf mehrere Module aufgeteilt:</p>
