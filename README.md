@@ -1,4 +1,7 @@
 # Webseite
+
+![Website](https://img.shields.io/website?down_color=red&down_message=offline&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2FSebastianBraun01.github.io)
+
 Mein Repository für den Quellcode meiner Webseite. Die Seite wird hier mit GitHub Pages gehostet.
 Hier möchte ich alle meine Projekte, an denen ich so arbeite, dokumentieren.
 
