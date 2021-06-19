@@ -62,10 +62,10 @@
       <div class="break"></div>
       <br>
       <br>
-      <p>Die Musik muss so vorbereitet werden, dass sie von den AD-Wandlern des Arduinos gemessen und verarbeitet werden kann. Der Arduino hat einen Messbereich von 0V bis 5V und kann keine negativen Spannungen messen. Der Klinkenstecker eines Handys schafft etwa ±150mV. Ich hab also einen Audio Verstärker entworfen, der die Spitzen von bis zu 150mV auf Spitzen von bis zu 2.5V verstärken kann und der Ausgangsspannung einen Grundanteil von 2.5V gibt. Somit bewegt sich die Spannung innerhalb und um den Mittelpunkt des Messbereiches.</p>
+      <p>Die Musik muss so vorbereitet werden, dass sie von den AD-Wandlern des Arduinos gemessen und verarbeitet werden kann. Der Arduino hat einen Messbereich von 0V bis 5V und kann keine negativen Spannungen messen. Der Klinkenstecker eines Handys schafft etwa ±150mV. Ich hab also einen Audio Verstärker entworfen, der die Spitzen von bis zu 150mV auf Spitzen von bis zu 2.5V verstärken kann und der Ausgangsspannung einen Grundanteil von 2.5V gibt. Somit bewegt sich die Spannung innerhalb und um den Mittelpunkt des Messbereiches. Ich verwende einen ICL7660 Spannungsinvertierer/-converter um den Operationsverstärker zu versorgen.</p>
       <br>
       <br>
-      <img src="" alt="Verstärkerschaltung">
+      <img src="../img/verstärker_schaltung.png" alt="Verstärkerschaltung" width="1100">
       <br>
       <br>
       <h1>Software</h1>
@@ -119,7 +119,7 @@
       Fürs erste wird an den Treiberblock nur ein ROM angeschlossen sein, das feste Farbdaten enthält, aber zulässt, dass nur LEDs bis zu einer bestimmten Höhe erleuchtet werden.</p>
       <br>
       <br>
-      <img src="" alt="Blockdarstellung vom npxl_treiber">
+      <iframe src="../img/npxl_treiber_rtl.pdf" width="1000" height="500">Blockdarstellung: npxl_treiber</iframe>
       <br>
       <br>
       <iframe src="../img/ws2812b_datasheet.pdf" width="1000" height="800">Datenblatt WS2812B</iframe>
@@ -132,6 +132,7 @@
       <p>Der npxl_controller importiert den npxl_treiber und ein ROM Modul. Die Außführung dieses Modul kann sich in der Zukunft noch ändert, aber in seiner jetzigen Form ließt es einen Höhenwert ein (also den Pegel der Musik) und lässt von unten hoch dementsprechend viele LEDs mit einer festen Farbe leuchten, während es die LEDs darüber ausschaltet. So habe ich meine Pegelanzeige für die FFT Megafunktion. Die Farbdaten werden von dem ROM gelesen. Ist die Höhe erreicht, die ich anzeigen will, wird der Adresse des npxl_treiber ein Offset hinzugefügt, das den Block einen anderen Adressraum des ROMs lesen lässt, wo nur Nullen drinstehen, also die LEDs ausschalten.</p>
       <br>
       <br>
+      <iframe src="../img/npxl_controller_rtl.pdf" width="1000" height="500">Blockdarstellung: npxl_controller</iframe>
       <img src="" alt="Blockdarstellung vom npxl_controller">
       <br>
       <br>
@@ -143,6 +144,9 @@
       <br>
       <br>
       <img src="../img/uart_protokoll.png" alt="UART Protokoll">
+      <br>
+      <br>
+      <iframe src="../img/uart_rx_rtl.pdf" width="1000" height="500">Blockdarstellung: uart_rx</iframe>
       <br>
       <br>
       <h1>FFT Megafunktion</h1>
@@ -173,7 +177,7 @@
     </section>
 
     <section id="Links">
-      <a class="Link-Button" href="#" target="_blank">Projekt Repository</a>
+      <a class="Link-Button" href="https://github.com/SebastianBraun01/vu_meter" target="_blank">Projekt Repository</a>
       <a class="Link-Button" href="https://zipcpu.com/dsp/2018/10/02/fft.html" target="_blank">Gisselquist Seite</a>
       <a class="Link-Button" href="https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-use" target="_blank">Adafruit Seite</a>
     </section>

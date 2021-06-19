@@ -52,6 +52,9 @@
       <p>Die erste Frage ist: wie betreibe ich am besten die Nixie Röhren? Die Nixies, die ich verwende haben eine Zündspannung von 180V und eine Brennspannung von 150V mit einem Anodenstrom von 2mA. Ich brauche also ein Netzteil mit 180V DC. Die erstbeste Möglichkeit wäre, Netztspannung auf 180V RMS runter zu transformieren und dann gleichzurichten. Das wäre an sich auch echt simpel, der Nachteil ist nur dass ich dann einen riesigen Trafo am der Uhr hängen hätte und da ich eine freistehende Platine haben will, wäre das Sicherheitstechnisch mit der Netzspannung nicht die beste Idee (außerdem sieht das nicht wirklich ansprechend aus). Mein Plan ist also ein 12V auf 180V DC-DC-Wandler zu entwerfen.</p>
       <br>
       <br>
+      <img src="../img/IN-8_nixie.jpg" alt="Bild IN-8 Nixie Röhre" width="250">
+      <br>
+      <br>
       <iframe src="../img/IN-8.pdf" width="1000" height="800"> Datenblatt IN-8 Nixie Röhre</iframe>
       <br>
       <br>
@@ -68,6 +71,12 @@
       <br>
       <br>
       <p>Dann gäbe es noch spezielle Treiberchips: entweder die traditionellen 74LS141, speziell für Nixie Röhren oder ein Latch-Array das für hohe Spannungen ausgelegt ist. Ich hab mir 6 von den 74LS141 bestellt. Im Endeffekt sind diese nur BCD auf Dezimal Umsetzer für Nixie Röhren. Soweit so gut. Jetzt hab ich aber immer noch die BCD Eingänge zu schalten, was immernoch 24 Pins wären. Damit der Arduino alle pins schalten kann (und ja ich benutze einen Arduino zur Steuerung), kann ich ganz einfach 3 8-Bit Schieberegister benutzen, in diesem Fall normale 74HC595.</p>
+      <br>
+      <br>
+      <img src="" alt="Schaltplan der ganzen Platine">
+      <br>
+      <br>
+      <img src="" alt="Bild der fertigen Uhr">
       <br>
       <br>
       <h1>Software</h1>
