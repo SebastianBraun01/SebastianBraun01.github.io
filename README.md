@@ -21,3 +21,15 @@ Da ich zum Teil Videos auf der Seite einfügen will, und git selber keine große
 - [ ] Irgendwie große Videos fetchen
 - [x] Script basierte Navbar
 - [ ] Artikel mit Markdown + automatischer converter
+
+# Artikel umschreiben
+
+- [x] LED Beleuchtung
+- [ ] LED Matrix
+- [ ] Nixie Uhr
+- [ ] Rustuino
+
+# Zukünftige Themen:
+
+- [ ] Hardware FFT Transformation
+- [ ] 8-Bit Computer

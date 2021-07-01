@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/artikel.css">
+  <link rel="stylesheet" href="../css/prism.css"/>
   <title>LED-Beleuchtung | Sebastian Braun</title>
 </head>
 
@@ -34,52 +35,137 @@
     </section>
 
     <section id="Beschreibung">
-      <p>Meine Freunde, mein Bruder und ich haben uns zu Hause einen Raum im Keller eingerichtet, wo wir treffen und Musik hören können. Ich wollte den Raum mit LED Streifen ausstatten, die ein paar Lichteffekte abspielen und sich wahlweise auch mit der Musik syncronisieren.</p>
-      <br>
-      <br>
-      <h1>Hardware</h1>
+      <h2>Einführung</h2>
       <div class="break"></div>
-      <br>
-      <br>
-      <p>Für die LED Streifen habe ich für die WS2812B entschieden, oder auch Neopixel, wie Adafruit wirbt. Dies sind digitale LEDs, deren Farbe frei programmierbar ist und die sich kaskadieren lassen. Dadurch lassen sich alle möglichen Farbmuster anzeigen, im gegensatz zu konventionellen RGB LEDs.<br>
-      Es braucht jedoch einen Mikrocontroller oder eine andere Steuerung, um die LEDs zu bedienen. Dafür nehme ich einen Arduino Nano 33 IOT. Das gibt mir einerseits den Vorteil, dass ich keine aufwendigen Funktionen für die Neopxiel selber schreiben muss, da Adafruit eine Bibliothek für Arduino anbietet und andererseits kann ich über die WLAN die Steuerungen für die einzelnen Streifen untereinander syncronisieren, damit alle Lichteffekte perfekt gleich angezeigt werden. Außerdem kann ich dann die Beleuchtung mit meinen Handy steuern (näheres später 😏).</p>
-      <br>
-      <br>
-      <p>Jeder einzelne Streifen bekommt eine Steuerung. Das ist einfach eine Platine mit dem Arduino und den weiteren passiven Komponenten. Einen Kondensator als Puffer für Stromspitzen und der Widerstand schützt die Datenleitung der LEDs. Für die Platinen mach ich noch ein kleines Gehäuse mit meinem 3D Drucker. Den Schaltplan und die Dateien für das Gehäuse kann man in meinem GitHub Repository finden.</p>
-      <br>
-      <br>
-      <img src="../img/led_schaltung.png" alt="Bild Schaltplan" width="800">
-      <br>
-      <br>
-      <img src="../img/led_platine.jpg" alt="Bild von der Platine" width="800">
-      <br>
-      <br>
-      <img src="" alt="Bild vom Gehäuse">
-      <br>
-      <br>
-      <h1>Software</h1>
+      <p>Meine Freunde, mein Bruder und ich haben uns zu Hause einen Raum im Keller eingerichtet, wo wir uns treffen und Musik hören können. Ich wollte den Raum mit LED Streifen ausstatten, die Lichteffekte abspielen und sich wahlweise auch mit der Musik syncronisieren.</p>
+      <h2>Hardware</h2>
       <div class="break"></div>
-      <br>
-      <br>
-      <p>Nun zum Programmcode. Wie ich oben schon erwähnt habe, gibt es für die LED Streifen eine Bibliothek für Arduino. Darüber hinaus habe ich für die Steuerung die Blynk IOT Platform gefunden, der Arduino und mein Handy verbinden sich mit einem Server und können untereinander Informationen austauschen. Ich kann also mit dem Handy Befehle an die LED Streifen senden und deren Status auslesen.<br>
-      Außerdem syncronisieren so die einzelnen Streifen ihre Lichteffekte. Dafür werde ich noch einen Arduino plazieren, der mit dem Mischpult der Surround Anlage verbunden ist und konstant die Lautstärkedaten ins Netzwerk sendet, sodas ich die Möglichkeit habe Lichteffekte zu programmieren, die sich mit der Musik syncronisieren.</p>
-      <br>
-      <br>
-      <p>Das Programm besteht aus den einzelnen auswählbaren Lichteffekten und den Callbacks der Blynk Bibliothek, die zwischen den einzelnen Modi umschalten können und Farbe, Helligkeit und Effekt-Geschwindigkeit einstellen.</p>
-      <br>
-      <br>
-      <p>Auf meinem Handy kann ich die App von Blynk installieren und die Steuerungselemente anpassen. Es gibt eine Reihe von coolen Controllblöcken und deren Funktionen sind auf der Documentation Seite von Blynk beschrieben. Ich muss nur noch die Arduinos, die ich für das Projekt verwende in der App registrieren. Dann bekomme ich die Geräte-IDs, die ich in die Programme der Arduinos eintrage, damit klar ist wer mit wem kommuniziert.<br>
-      Wenn das getan ist und sich alle mit dem WLAN verbunden haben, kann man nun mit dem Handy die Lichteffekte auswählen, die Helligkeit der LEDs ändern, die Farbe bei einfarbigen Effekten auswählen und die Effekt Geschwindigkeit einstellen und bekommt immer eine Bestätigung auf dem Terminal auf dem Handy.</p>
-      <br>
-      <br>
-      <img src="../img/blynk_app.png" alt="Screenshot der App" width="370">
-      <br>
-      <br>
-      <h1>Sourcecode</h1>
+      <h3>LED Streifen</h3>
+      <p>Für die LEDs verwende ich WS2812B RGB LEDs, auch bekannt als Neopixel. Anders als herkömmliche Spannungsgesteuerte LEDs werden diese über einen 24-Bit Farbcode eingestellt. Somit kann man die Farbe jeder einzelnen LED einstellen und zeitgesteuerte Effekte auf dem Streifen abspielen.</p>
+      <p>Jede LED hat 4 Anschlüsse: 5V, GND, DATA<em>IN und DATA</em>OUT. In einem Streifen werden die LEDs kaskadiert, indem man den Datenausgang der vorigen LED mit dem Dateneingang der nächsten verbindet. Ist der Datenpuffer einer LED voll und es werden mehr Daten übertragen, läuft der Puffer in die nächste LED über. Der Streifen verhält sich ähnlich wie ein langes Schieberegister.</p>
+      <img src="../img/neopixel_pins.jpg" alt="Neopixel Anschlüsse"/>
+      <p>Das Senden von Bits geschieht über Taktpulse. Deren Dauer bestimmt ob eine 0 oder 1 gesendet wurde. Sind alle Daten übertragen wird die Datenleitung für eine bestimmte Zeit auf GND gehalten, was für die LEDs heißt, dass die Farbdaten im Puffer angezeigt werden sollen. Die Taktzeigen und Farbcodes können im Datenblatt nachgelesen werden.</p>
+      <iframe src="../img/ws2812b_datasheet.pdf" width="800" height="800">Datenblatt WS2812B</iframe>
+      <h3>Arduino</h3>
+      <p>Für die Steuerung der einzelnen Streifen kommen Arduino Nano 33 IOTs zum Einsatz. Diese haben einen kleinen Formfakter und bringen über den WIFI-NINA Chip eine WLAN und Bluetooth Verbindung mit. Jeder Streifen bekommt eine eigene Steuerung und alle sollen dann untereinander über WLAN vernetzt werden.</p>
+      <h3>Schaltung</h3>
+      <p>Die Verbindung von den LED Streifen mit den Arduinos ist sehr simpel. Zum Schutz vor zu hohen Strömen wird zwischen Arduino und Dateneingang ein 470Ohm Widerstand gesetzt. Da der Stromverbrauch in den Streifen sehr schnell schwanken kann, ist es ratsam einen relativ großen Kondensator an die Versorgung zu legen.</p>
+      <p>Die LEDs können bei hoher Helligkeit einen großen Stromverbrauch haben (bis zu 3A bei 5m). Es ist also nicht ratsam die Streifen über den Arduino direkt zu versorgen, weil der Spannungsregler im Arduino nicht für solche Ströme ausgelegt ist. Bei längeren Streifen ist ein externes Netzteil ist nötig.</p>
+      <img src="../img/neopixel_schaltung.png" alt="Anschlussdiagramm" width="700"/>
+      <img src="../img/led_schaltung.png" alt="Schaltplan" width="800"/>
+      <img src="../img/led_platine.jpg" alt="Platine" width="800"/>
+      <h3>Gehäuse</h3>
+      <p>Für die Platinen habe ich mit Fusion360 ein Gehäuse konstruiert. Das Gehäuse hat einen Deckel mit einem Einrastverschluss und an den Innenwänden befindet sich ein Clip-System, das die Platine festhält.</p>
+      <p>Mit meinem 3D Drucker (Ender 5) habe ich das Gehäuse in PLA gedruckt. Alle STL-Dateien befinden sich auch im Repository.</p>
+      <img src="../img/" alt="Gehäuse" />
+      <h2>Software</h2>
       <div class="break"></div>
-      <br>
-      <br>
-      <p>Das Repository mit dem Programmcode ist unten verlinkt. Ich empfehle einfach mal reinzuschauen, ich freue mich über Kommentare und Verbesserungsvorschläge. Ich habe auch noch andere Projekte die man sich anschauen kann. Insbesondere das Projekt LED-Matrix ist auch teil der ganzen Kellerbeleuchtung und ist für alle interessant, die mal Projekte mit FPGAs angehen wollen.</p>
+      <h3>PlatformIO</h3>
+      <p>Zur Programmierung des Arduinos verwende ich nicht mehr die traditionelle Arduino IDE sondern ein IDE Plugin namens PlatformIO. Das ist für die erweiterbaren Texteditoren Visual Studio Code und Atom verfügbar und kann als Erweiterung intstalliert werden.</p>
+      <p>Einstellungen wie das Board und verwendete Bibliotheken werden in der IDE werden per Projekt gesetzt, in der platiformio.ini Konfigurationsdatei.</p>
+      <pre><code class="language-TOML">
+; PlatformIO Project Configuration File
+;
+; Please visit documentation for the other options and examples 
+; https://docs.platformio.org/page/projectconf.html
+    
+[env:nano_33_iot]
+platform = atmelsam
+board = nano_33_iot
+framework = arduino
+lib_deps = 
+  blynkkk/Blynk@^0.6.7
+  adafruit/Adafruit NeoPixel@^1.7.0
+  arduino-libraries/WiFiNINA@^1.8.1
+      </code></pre>
+      <h3>Neopixel Bibliothek</h3>
+      <p>Um das Ansteuern der Neopixel mit dem Arduino zu erleichtern, stellt Adafruit die Neopixel Bibliothek bereit. Jedem Streifen am Arduino wird ein C++ Objekt zugeordnet, das alle Daten zur Ansteuerung enthält (Länge, Typ, Farbode, …).</p>
+      <pre><code class="language-c++">
+#define LED_PIN 1
+#define LED_COUNT 240
+      
+Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+// NEO_KHZ800  800 KHz bitstream (most NeoPixel products w/WS2812 LEDs)
+// NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
+// NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
+// NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
+// NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
+      </code></pre>
+      <p>Um die Farben der LEDs einzustellen ruft man die Methode <em>setPixelColor()</em> des Streifen auf, den man bearbeiten will. <em>n</em> ist der Index der LED (<em>n</em> = 0 für die erste, <em>n</em> = 1 für die zweite, …). <em>red</em>, <em>green</em> und <em>blue</em> sind die Farbwerte und gehen von 0 bis 255. Wenn alle Farben eingestellt sind kann man mit <em>show()</em> alles anzeigen lassen. <em>numPixels()</em> gibt mir die Anzahl der LEDs im Streifen zurück.</p>
+      <p>Wenn ich z.B den halben Streifen Rot färben will, gehe ich wie folgt vor:</p>
+      <pre><code class="language-c++">
+// strip.setPixelColor(n, red, green, blue);
+      
+for (int i = 0; i &lt; strip.numPixels() / 2; i++) {
+  strip.setPixelColor(i, 255, 0, 0);
+}
+strip.show();
+      </code></pre>
+      <p>So lassen sich auch komplexere Effekte programmieren. Zum Beispiel möchte ich jetzt, dass sich der Streifen langsam mit Rot füllt und dann wieder zurückwandert:</p>
+      <pre><code class="language-c++">
+for (int i = 0; i &lt; strip.numPixels(); i++) {
+  strip.setPixelColor(i, 255, 0, 0);
+  strip.show();
+  delay(50);
+}
+      
+for (int i = strip.numPixels(); i &gt; 0; i--) {
+  strip.setPixelColor(i, 0, 0, 0);
+  strip.show();
+  delay(50);
+}
+      </code></pre>
+      <h3>Blynk Bibliothek</h3>
+      <h4>Arduino Code</h4>
+      <p>Die Blynk Bibliothek ermöglicht es, dass die einzelnen Streifen untereinander kommunizieren und dass ich die Farben und Effekte mit meinem Handy einstellen kann. Die Arduinos kommunizieren über "virtuelle pins", diese können alle möglichen Datentypen zwischen den Geräten transportieren. Das funktioniert in der Form eines "Publish-Subscribe-Modells".</p>
+      <p>Um den Datentransfer zu ermöglichen, wird jeder Arduino in der App registriert und erhält einen Athentication-Token. Dieser wird zusammen mit den WLAN-Daten in den Arduino eingetragen:</p>
+      <pre><code class="language-c++">
+char auth[] = "irgendeintoken";
+char ssid[] = "wlanname";
+char pass[] = "wlanpasswort";
+    
+void setup() {
+  Blynk.begin(auth, ssid, pass);
+  while(Blynk.connected() == false);
+}
+      
+void loop() {
+  Blynk.run();    // Hält die Verbindung aufrecht, sollte regelmäßig aufgerufen werden
+}
+      </code></pre>
+      <p>Ein Gerät kann darauf achten ob auf einem virtuellen pin Daten gesendet werden. Ist das der Fall, wird eine Callback-Funktion ausgeführt, die irgendwie auf die Daten reagiert. Dementsprechend kann jedes Gerät irgendwelche Daten auf einem virtuellen pin senden, unabhängig davon ob andere Geräte zuhöhren oder nicht:</p>
+      <pre><code class="language-c++">
+// Sende daten zur App über virtuelle pins
+Blynk.virtualWrite(V1, true);
+Blynk.virtualWrite(V2, 123);
+Blynk.virtualWrite(V3, "abc");
+      
+BLYNK_WRITE(V0) {
+  // code wird ausgeführt wenn sich der wert des virtuellen pins V0 ändert
+}
+      
+BLYNK_READ(V4) {
+  // arduino wird von der app angefragt, interne daten über V4 zur app zu senden
+}
+      </code></pre>
+      <p>Jeder Arduino kann auf einem virtuellen pin eine Callback-Funktion haben. Der Unterschied besteht darin, wenn der Arduino Daten zur App oder zu anderen Arduinos senden will. Wenn Daten werden mit der Methode <em>Blynk.virtualWrite()</em> zur App gesendet. Wenn Daten zu einem bestimmten Arduino sollen, muss man den Arduino mit seinem eigenen Authentication-Token anzielen:</p>
+      <pre><code class="language-c++">
+char auth_other_arduino[] = "3oth90ga4o3gp09aqw8h43t0ngpw";
+WidgetBridge bridge(V5);
+      
+void setup() {
+  // Andere initialisierungen...
+  bridge.setAuthToken(auth_other_arduino);
+  bridge.digitalWrite(2, HIGH); // Digitale Pins des anderen Arduinos steuern
+  bridge.virtualWrite(V4, "test");
+}
+      </code></pre>
+      <h4>App</h4>
+      <p>In der App kann man mit Widgets ein Controll-Dashboard erstellen. Man hat die Auswahl zwischen Buttons, Slider, Anzeigen, Terminals, usw. Jedes Widget hat ein kleines Tutorial, das erklärt, wie die Widgets konfiguriert werden und wie man den Code im Arduino aufsetzen muss. Hier ist das kleine Dashboard, das ich für die LED Streifen erstellt habe.</p>
+      <img src="../img/blynk_app.png" alt="App" width="400"/>
+      <h2>Sourcecode</h2>
+      <div class="break"></div>
+      <p>Alle Quelldateien liegen in meinem Repository. Ich habe die Dokumentation für die Neopixel- und Blynkbibliothek unten verlinkt. Ich freue mich immer über Kommentare und Verbesserungsvorschläge.</p>
     </section>
 
     <section id="Links">
@@ -87,6 +173,10 @@
       <a class="Link-Button"href="https://blynk.io/" target="_blank">Blynk Bibliothek</a>
       <a class="Link-Button"href="https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-use" target="_blank">Adafruit Neopixel Bibliothek</a>
     </section>
+
+
+    <!-- Javascript -->
+    <script src="../ts/out/prism.js"></script>
   </main>
 </body>
 </html>
