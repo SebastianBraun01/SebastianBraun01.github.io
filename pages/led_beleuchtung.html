@@ -130,7 +130,7 @@ void setup() {
 }
       
 void loop() {
-  Blynk.run();    // Hält die Verbindung aufrecht, sollte regelmäßig aufgerufen werden
+  Blynk.run();  // Hält die Verbindung aufrecht -> regelmäßig aufrufen!
 }
       </code></pre>
       <p>Ein Gerät kann darauf achten ob auf einem virtuellen pin Daten gesendet werden. Ist das der Fall, wird eine Callback-Funktion ausgeführt, die irgendwie auf die Daten reagiert. Dementsprechend kann jedes Gerät irgendwelche Daten auf einem virtuellen pin senden, unabhängig davon ob andere Geräte zuhöhren oder nicht:</p>
