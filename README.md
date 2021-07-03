@@ -26,7 +26,7 @@ Da ich zum Teil Videos auf der Seite einfügen will, und git selber keine große
 # Artikel umschreiben
 
 - [x] LED Beleuchtung
-- [ ] LED Matrix
+- [x] LED Matrix
 - [ ] Nixie Uhr
 - [ ] Rustuino
 
