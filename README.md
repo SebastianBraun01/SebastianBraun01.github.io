@@ -27,7 +27,7 @@ Da ich zum Teil Videos auf der Seite einfügen will, und git selber keine große
 
 - [x] LED Beleuchtung
 - [x] LED Matrix
-- [ ] Nixie Uhr
+- [x] Nixie Uhr
 - [ ] Rustuino
 
 # Zukünftige Themen:
