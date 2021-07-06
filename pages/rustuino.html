@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/artikel.css">
+  <link rel="stylesheet" href="../css/prism.css"/>
   <title>Rustuino | Sebastian Braun</title>
 </head>
 
@@ -37,14 +38,14 @@
       <p>Ich wollte mir schon lange mal die Programmiersprache Rust anschauen. Zu der Zeit haben wir in Mikrocomputertechnik an der Hochschule besprochen, wie man auf Registerebene die Peripherie in einem Mikrocontroller benutzen kann. Ich der Hochschule haben wir dafür Assembly benutzt. Ich wollte aber nebenbei, die Sachen die wir gelernt haben auch in Rust umsetzen.</p>
       <br>
       <br>
-      <h1>Was ist Rust?</h1>
+      <h2>Was ist Rust?</h2>
       <div class="break"></div>
       <br>
       <br>
       <p>Rust ist eine vergleichbar junge Programmiersprace, die mit C/C++ als Systemlevel Programmiersprache konkuriert. Das bedeutet, dass sich viele Infrastrukturen für Rust, wie GUI-, Embedded- und Netzwerkprogrammierung erst noch richtig entwickeln müssen. Trotzdem gibt es einen richtigen Hype um Rust, was man einmal daran sieht, dass gerade auf allen Seiten an Projekten geschraubt wird, um die Vielseitigkeit von Rust zu verbessern und auf der anderen Seite schreiben gerade eine kleine Armee von Enthusiasten die Linux Core Utilities in Rust neu und veröffentlichen sie auf GitHub, was is irgendwie cool finde (ich wette mit euch, irgendwann sehen wir einen kompletten Linux Kernel in Rust).</p>
       <br>
       <br>
-      <h1>Was macht die Bibliohtek?</h1>
+      <h2>Was macht die Bibliohtek?</h2>
       <div class="break"></div>
       <br>
       <br>
@@ -60,14 +61,14 @@
       <p>Mein Professor in Mikrocomputertechnik ist sehr an dem Projekt interessiert, und vielleicht kann ich ein offizielles Studentenprojekt anmelden, das an der Hochschule anerkannt wird und was mein Professor als Stoff für seinen Unterricht gebrauchen kann. Wenn ich weiteres weiß, schreib ich es hier mit rein.</p>
       <br>
       <br>
-      <h1>Pinmodes</h1>
+      <h2>Pinmodes</h2>
       <div class="break"></div>
       <br>
       <br>
       <p>Als erstes muss ich funktionen schreiben, die die Pins des Mikrocontrollers konfigurieren, ähnlich die pinMode bei Arduino, mit dem Unterschied, dass ich im Hintergrund die Konfiguration speichern will, sodass wenn z.B von einem Pin gelesen wird unter dieser nicht oder anderes konfiguriert ist, ein compiletime error entsteht. Außerdem würde Rust-Anayzer sofort den Fehler erkennen und Fehlermeldungen geben, was das programmiren sehr erleichtern würde.</p>
       <br>
       <br>
-      <h1>Verlauf</h1>
+      <h2>Verlauf</h2>
       <div class="break"></div>
       <br>
       <br>
@@ -78,6 +79,10 @@
       <a class="Link-Button" href="https://github.com/SebastianBraun01/rustuino" target="_blank">Projekt Repository</a>
       <a class="Link-Button" href="https://www.rust-lang.org/" target="_blank">Rust Webseite</a>
     </section>
+
+
+    <!-- Javascript -->
+    <script src="../ts/out/prism.js"></script>
   </main>
 </body>
 </html>

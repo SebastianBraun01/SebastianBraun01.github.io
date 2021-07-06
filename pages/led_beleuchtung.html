@@ -44,7 +44,7 @@
       <p>Für die LEDs verwende ich WS2812B RGB LEDs, auch bekannt als Neopixel. Anders als herkömmliche Spannungsgesteuerte LEDs werden diese über einen 24-Bit Farbcode eingestellt. Somit kann man die Farbe jeder einzelnen LED einstellen und zeitgesteuerte Effekte auf dem Streifen abspielen.</p>
       <br>
       <p>Jede LED hat 4 Anschlüsse: <b>5V</b>, <b>GND</b>, <b>DATA-IN</b> und <b>DATA-OUT</b>. In einem Streifen werden die LEDs kaskadiert, indem man den Datenausgang der vorigen LED mit dem Dateneingang der nächsten verbindet. Ist der Datenpuffer einer LED voll und es werden mehr Daten übertragen, läuft der Puffer in die nächste LED über. Der Streifen verhält sich ähnlich wie ein langes Schieberegister.</p>
-      <div class="img-container"><img src="../img/neopixel_pins.jpg" alt="Neopixel Anschlüsse" width="500"/></div>
+      <div class="img-container"><img src="../img/neopixel_pins.jpg" alt="Neopixel Anschlüsse" width="300"/></div>
       <p>Das Senden von Bits geschieht über Taktpulse. Deren Dauer bestimmt ob eine 0 oder 1 gesendet wurde. Sind alle Daten übertragen wird die Datenleitung für eine bestimmte Zeit auf GND gehalten, was für die LEDs heißt, dass die Farbdaten im Puffer angezeigt werden sollen. Die Taktzeigen und Farbcodes können im Datenblatt nachgelesen werden.</p>
       <iframe src="../img/ws2812b_datasheet.pdf" width="800" height="800">Datenblatt WS2812B</iframe>
       <h3>Arduino</h3>

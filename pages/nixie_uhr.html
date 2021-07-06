@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/artikel.css">
+  <link rel="stylesheet" href="../css/prism.css"/>
   <title>Nixie-Uhr | Sebastian Braun</title>
 </head>
 
@@ -37,24 +38,27 @@
       <h2>Einleitung</h2>
       <div class="break"></div>
       <p>Die Nixie-Uhr, ein Klassiker für jeden Elektronik Hobbybastler. Das war so ein Projekt, das ich vor ewigen Zeiten mal angefangen aber nie fertiggestellt habe. Jetzt aber wird es Zeit, dass ich die Uhr endlich mal fertig stelle. Alle Schaltpläne und Programme werden auf GitHub veröffentlicht und das Projekt auf meiner Webseite dokumentiert.</p>
-      <img src="../img/IN-8_nixie.jpg" alt="Nixie Röhre" width="250"/>
+      <div class="img-container"><img src="../img/IN-8_nixie.jpg" alt="Nixie Röhre" width="300"/></div>
       <h2>Hardware</h2>
       <div class="break"></div>
       <h3>Netzteil</h3>
       <p>Die erste Frage ist: wie betreibe ich die Nixie Röhren? Das Modell, das ich verwende hat eine Zündspannung von 180V DC, eine Brennspannung von 150V und einen Anodenstrom von 2mA.</p>
       <iframe src="../img/IN-8.pdf" width="800" height="800">IN-8 Datenblatt</iframe>
       <p>Die erstbeste Möglichkeit wäre, ein Transformator basiertes Netzteil zu verwenden. Der Aufbau eines solchen Netzteil ist sehr simpel, es gibt jedoch einen Nachteil: Die Uhr soll eine Freistehende Platine haben und ein großer Trafo der an der Unterseite hängt, sieht nicht wirklich ansehnlich aus. Dazu kommt noch, dass freiliegende Netzspannung sehr gefählich ist.</p>
+      <br>
       <p>Ich habe mich dafür entschieden einen 12V auf 180V DC-DC-Wandler zu entwerfen. Normalerweise werden Schaltnetzteile immer instabiler je größer die Differenz zwischen Eingangs- und Ausgangsspannung ist. Vor Allem wenn große Lasten angeschlossen werden. Durch den geringen Betriebstrom der Nixies sollte das aber kein Problem darstellen.</p>
+      <br>
       <p>Als Inspiration habe ich mir verschiedenste Netzteilenwürfe angeschaut. Ich bin dann auf den Artikel von Threeneuron gestoßen, der die Vor- und Nachteile von verschiedenen Netzteildesigns für die Versorgung von Nixies aufgelistet hat und erklärt, was bei einem guten Netzteildesign zu beachten ist.</p>
-      <img src="../img/threeneuron_netzteil.gif" alt="Threeneuron Netzteil" width="600"/>
+      <div class="img-container"><img src="../img/threeneuron_netzteil.gif" alt="Threeneuron Netzteil" width="500"/></div>
       <p>Ich habe mir sein Design MK1.5 mit dem MC34063 Schalt-IC als Vorlage genommen und auf meine Bedürfnisse angepasst. Erstens sollte das Design vollständig SMD basiert sein, damit es sich schön auf der Unterseite der Platine verstecken kann. Zweitens habe ich für die Feinjustage der Spannung noch einen Trimmerwiderstand einbaut und ein paar Bauteile angepasst auf welche, die ich schon da habe. Unten ist mein Entwurf in Eagle.</p>
-      <img src="../img/netzteil_schaltung.png" alt="Nixie Netzteil Design" width="1300"/>
+      <div class="img-container"><img src="../img/netzteil_schaltung.png" alt="Nixie Netzteil Design" width="500"/></div>
       <h3>Ansteuerung</h3>
       <p>Ich einen Prototyp gebaut und getestet. Danach habe ich den Schaltplan des Netzteils auf die Nixie Uhr Platine kopiert und die komplette Platine fertig entworfen. Jetzt sollte ich darauf eingehen, wie ich die einzelnen Pins der Nixies am besten schalte, denn jede Ziffer ist eine eigene Kathode und alle Ziffern teilen sich ein Anodengitter.</p>
-      <img src="../../img/netzteil_prototyp.jpg" alt="Nixie Netzteil Prototyp" width="800"/>
+      <div class="img-container"><img src="../img/netzteil_prototyp.jpg" alt="Nixie Netzteil Prototyp" width="500"/></div>
       <p>Eine Möglichkeit währe, einen MOSFET für jeden Pin zu verwenden, aber daführ bräuchte ich 60 MOSFETs für alle 6 Röhren und das ist garantiert keine gute Lösung. Dann gäbe es noch die Möglichkeit spezielle Treiberchips zu verwenden: entweder die traditionellen 74LS141, das speziell für Nixie Röhren ausgelegt ist oder ein Latch-Array, welches hohe Spannungen aushält.</p>
+      <br>
       <p>Ich hab mich für 6 74LS141 entschieden. Einfach gesagt funktionieren diese nur wie BCD auf Dezimal Umsetzer aber für Nixie Röhren. Jetzt hab ich aber immer noch die BCD Eingänge zu schalten, was 24 Pins entspricht. Da die pins nicht sehr schnell geschaltet werden müssen, kann ich ganz einfach 3 8-Bit Schieberegister benutzen, in diesem Fall 74HC595. Die fertige Platine sieht dann wie folgt aus:</p>
-      <img src="" alt="Nixie Platine">
+      <div class="img-container"><img src="" alt="Nixie Platine" width="500"/></div>
       <p>Kleine Anmerkung: Ich habe unter jeder Röhre noch eine kleine, blaue LED plaziert. Das wird bei Nixie Uhren öfter gemacht, weil das blaue Licht im Kontrast mit dem warmen orangen Leuchten der Nixie Röhren einen tollen Effekt erzielt.</p>
       <h2>Software</h2>
       <div class="break"></div>
@@ -72,6 +76,10 @@
       <a class="Link-Button" href="https://threeneurons.wordpress.com/nixie-power-supply/" target="_blank">Threeneuron's Pile o Poo seite</a>
       <a class="Link-Button" href="https://www.daliborfarny.com/" target="_blank">Dalibor Farny Seite</a>
     </section>
+
+
+    <!-- Javascript -->
+    <script src="../ts/out/prism.js"></script>
   </main>
 </body>
 </html>
