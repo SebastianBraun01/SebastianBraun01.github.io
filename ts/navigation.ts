@@ -22,7 +22,7 @@ const haupt_nav = document.getElementById("haupt-nav");
 const sub_nav = document.getElementById("sub-nav");
 
 dropdown.onclick = () => {
-  if(dropdown_icon.innerText == "+"){
+  if (dropdown_icon.innerText == "+"){
     dropdown_icon.innerText = "-";
     haupt_nav.classList.remove("schatten");
     sub_nav.classList.add("schatten");
@@ -35,3 +35,18 @@ dropdown.onclick = () => {
     sub_nav.classList.add("unsichtbar");
   }
 }
+
+
+// Image zoom =====================================================================================
+const images = document.querySelectorAll("img");
+
+images.forEach((img) => {
+  img.onclick = () => {
+    if (img.classList.contains("zoomed") == false) {
+      img.classList.add("zoomed");
+    }
+    else {
+      img.classList.remove("zoomed");
+    }
+  }
+});

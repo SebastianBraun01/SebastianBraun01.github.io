@@ -42,22 +42,24 @@
       <div class="break"></div>
       <h3>LED Streifen</h3>
       <p>Für die LEDs verwende ich WS2812B RGB LEDs, auch bekannt als Neopixel. Anders als herkömmliche Spannungsgesteuerte LEDs werden diese über einen 24-Bit Farbcode eingestellt. Somit kann man die Farbe jeder einzelnen LED einstellen und zeitgesteuerte Effekte auf dem Streifen abspielen.</p>
-      <p>Jede LED hat 4 Anschlüsse: 5V, GND, DATA<em>IN und DATA</em>OUT. In einem Streifen werden die LEDs kaskadiert, indem man den Datenausgang der vorigen LED mit dem Dateneingang der nächsten verbindet. Ist der Datenpuffer einer LED voll und es werden mehr Daten übertragen, läuft der Puffer in die nächste LED über. Der Streifen verhält sich ähnlich wie ein langes Schieberegister.</p>
-      <img src="../img/neopixel_pins.jpg" alt="Neopixel Anschlüsse"/>
+      <br>
+      <p>Jede LED hat 4 Anschlüsse: <b>5V</b>, <b>GND</b>, <b>DATA-IN</b> und <b>DATA-OUT</b>. In einem Streifen werden die LEDs kaskadiert, indem man den Datenausgang der vorigen LED mit dem Dateneingang der nächsten verbindet. Ist der Datenpuffer einer LED voll und es werden mehr Daten übertragen, läuft der Puffer in die nächste LED über. Der Streifen verhält sich ähnlich wie ein langes Schieberegister.</p>
+      <div class="img-container"><img src="../img/neopixel_pins.jpg" alt="Neopixel Anschlüsse" width="500"/></div>
       <p>Das Senden von Bits geschieht über Taktpulse. Deren Dauer bestimmt ob eine 0 oder 1 gesendet wurde. Sind alle Daten übertragen wird die Datenleitung für eine bestimmte Zeit auf GND gehalten, was für die LEDs heißt, dass die Farbdaten im Puffer angezeigt werden sollen. Die Taktzeigen und Farbcodes können im Datenblatt nachgelesen werden.</p>
       <iframe src="../img/ws2812b_datasheet.pdf" width="800" height="800">Datenblatt WS2812B</iframe>
       <h3>Arduino</h3>
       <p>Für die Steuerung der einzelnen Streifen kommen Arduino Nano 33 IOTs zum Einsatz. Diese haben einen kleinen Formfakter und bringen über den WIFI-NINA Chip eine WLAN und Bluetooth Verbindung mit. Jeder Streifen bekommt eine eigene Steuerung und alle sollen dann untereinander über WLAN vernetzt werden.</p>
       <h3>Schaltung</h3>
       <p>Die Verbindung von den LED Streifen mit den Arduinos ist sehr simpel. Zum Schutz vor zu hohen Strömen wird zwischen Arduino und Dateneingang ein 470Ohm Widerstand gesetzt. Da der Stromverbrauch in den Streifen sehr schnell schwanken kann, ist es ratsam einen relativ großen Kondensator an die Versorgung zu legen.</p>
+      <br>
       <p>Die LEDs können bei hoher Helligkeit einen großen Stromverbrauch haben (bis zu 3A bei 5m). Es ist also nicht ratsam die Streifen über den Arduino direkt zu versorgen, weil der Spannungsregler im Arduino nicht für solche Ströme ausgelegt ist. Bei längeren Streifen ist ein externes Netzteil ist nötig.</p>
-      <img src="../img/neopixel_schaltung.png" alt="Anschlussdiagramm" width="700"/>
-      <img src="../img/led_schaltung.png" alt="Schaltplan" width="800"/>
-      <img src="../img/led_platine.jpg" alt="Platine" width="800"/>
+      <div class="img-container"><img src="../img/neopixel_schaltung.png" alt="Anschlussdiagramm" width="500"/></div>
+      <div class="img-container"><img src="../img/led_schaltung.png" alt="Schaltplan" width="500"/></div>
+      <div class="img-container"><img src="../img/led_platine.jpg" alt="Platine" width="500"/></div>
       <h3>Gehäuse</h3>
       <p>Für die Platinen habe ich mit Fusion360 ein Gehäuse konstruiert. Das Gehäuse hat einen Deckel mit einem Einrastverschluss und an den Innenwänden befindet sich ein Clip-System, das die Platine festhält.</p>
       <p>Mit meinem 3D Drucker (Ender 5) habe ich das Gehäuse in PLA gedruckt. Alle STL-Dateien befinden sich auch im Repository.</p>
-      <img src="../img/" alt="Gehäuse" />
+      <div class="img-container"><img src="../img/" alt="Gehäuse" width="500"/></div>
       <h2>Software</h2>
       <div class="break"></div>
       <h3>PlatformIO</h3>
@@ -91,7 +93,8 @@ Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 // NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
 // NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
       </code></pre>
-      <p>Um die Farben der LEDs einzustellen ruft man die Methode <em>setPixelColor()</em> des Streifen auf, den man bearbeiten will. <em>n</em> ist der Index der LED (<em>n</em> = 0 für die erste, <em>n</em> = 1 für die zweite, …). <em>red</em>, <em>green</em> und <em>blue</em> sind die Farbwerte und gehen von 0 bis 255. Wenn alle Farben eingestellt sind kann man mit <em>show()</em> alles anzeigen lassen. <em>numPixels()</em> gibt mir die Anzahl der LEDs im Streifen zurück.</p>
+      <p>Um die Farben der LEDs einzustellen ruft man die Methode <b>setPixelColor()</b> des Streifen auf, den man bearbeiten will. <b>n</b> ist der Index der LED (<b>n = 0</b> für die erste, <b>n = 1</b> für die zweite, …). <b>red</b>, <b>green</b> und <b>blue</b> sind die Farbwerte und gehen von 0 bis 255. Wenn alle Farben eingestellt sind kann man mit <b>show()</b> alles anzeigen lassen. <b>numPixels()</b> gibt mir die Anzahl der LEDs im Streifen zurück.</p>
+      <br>
       <p>Wenn ich z.B den halben Streifen Rot färben will, gehe ich wie folgt vor:</p>
       <pre><code class="language-c++">
 // strip.setPixelColor(n, red, green, blue);
@@ -118,6 +121,7 @@ for (int i = strip.numPixels(); i &gt; 0; i--) {
       <h3>Blynk Bibliothek</h3>
       <h4>Arduino Code</h4>
       <p>Die Blynk Bibliothek ermöglicht es, dass die einzelnen Streifen untereinander kommunizieren und dass ich die Farben und Effekte mit meinem Handy einstellen kann. Die Arduinos kommunizieren über "virtuelle pins", diese können alle möglichen Datentypen zwischen den Geräten transportieren. Das funktioniert in der Form eines "Publish-Subscribe-Modells".</p>
+      <br>
       <p>Um den Datentransfer zu ermöglichen, wird jeder Arduino in der App registriert und erhält einen Athentication-Token. Dieser wird zusammen mit den WLAN-Daten in den Arduino eingetragen:</p>
       <pre><code class="language-c++">
 char auth[] = "irgendeintoken";
@@ -148,7 +152,7 @@ BLYNK_READ(V4) {
   // arduino wird von der app angefragt, interne daten über V4 zur app zu senden
 }
       </code></pre>
-      <p>Jeder Arduino kann auf einem virtuellen pin eine Callback-Funktion haben. Der Unterschied besteht darin, wenn der Arduino Daten zur App oder zu anderen Arduinos senden will. Wenn Daten werden mit der Methode <em>Blynk.virtualWrite()</em> zur App gesendet. Wenn Daten zu einem bestimmten Arduino sollen, muss man den Arduino mit seinem eigenen Authentication-Token anzielen:</p>
+      <p>Jeder Arduino kann auf einem virtuellen pin eine Callback-Funktion haben. Der Unterschied besteht darin, wenn der Arduino Daten zur App oder zu anderen Arduinos senden will. Wenn Daten werden mit der Methode <b>Blynk.virtualWrite()</b> zur App gesendet. Wenn Daten zu einem bestimmten Arduino sollen, muss man den Arduino mit seinem eigenen Authentication-Token anzielen:</p>
       <pre><code class="language-c++">
 char auth_other_arduino[] = "3oth90ga4o3gp09aqw8h43t0ngpw";
 WidgetBridge bridge(V5);
@@ -162,7 +166,7 @@ void setup() {
       </code></pre>
       <h4>App</h4>
       <p>In der App kann man mit Widgets ein Controll-Dashboard erstellen. Man hat die Auswahl zwischen Buttons, Slider, Anzeigen, Terminals, usw. Jedes Widget hat ein kleines Tutorial, das erklärt, wie die Widgets konfiguriert werden und wie man den Code im Arduino aufsetzen muss. Hier ist das kleine Dashboard, das ich für die LED Streifen erstellt habe.</p>
-      <img src="../img/blynk_app.png" alt="App" width="400"/>
+      <div class="img-container"><img src="../img/blynk_app.png" alt="App" height="400"/></div>
       <h2>Sourcecode</h2>
       <div class="break"></div>
       <p>Alle Quelldateien liegen in meinem Repository. Ich habe die Dokumentation für die Neopixel- und Blynkbibliothek unten verlinkt. Ich freue mich immer über Kommentare und Verbesserungsvorschläge.</p>

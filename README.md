@@ -15,7 +15,8 @@ Da ich zum Teil Videos auf der Seite einfügen will, und git selber keine große
 - [x] Über mich Seite umschreiben
 - [ ] Bessere Animation
 - [ ] Restliche Fotos einfügen
-- [ ] Zoombare Bilder
+- [x] Zoombare Bilder
+- [ ] PDFs einklappbar
 - [ ] Eigene Domain
 - [ ] kleien Sidebar in den Artikeln und Inhaltsverzeichnis (klickbar)
 - [ ] Github Readmes aller Repositories fertigstellen

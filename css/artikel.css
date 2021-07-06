@@ -2,8 +2,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 20rem;
-  padding-top: 5rem;
+  margin: 0 25rem;
 }
 
 #Kopf {
@@ -11,13 +10,16 @@ main {
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
+  margin: 5rem 0 50px 0;
 }
 
-h1 {
+#Kopf h1 {
   font-size: 2.5rem;
   padding-bottom: 50px;
 }
 
+
+/* Beschreibung =================================================================================== */
 #Beschreibung {
   display: flex;
   flex-direction: column;
@@ -26,29 +28,41 @@ h1 {
 
 h2, h3, h4 {
   align-self: flex-start;
-  margin-top: 50px;
+}
+
+#Beschreibung h2 {
+  font-size: 2rem;
+  margin-top: 5rem;
+}
+
+#Beschreibung h3 {
+  font-size: 1.6rem;
+  margin-top: 30px;
   margin-bottom: 10px;
 }
 
-h2 {
-  font-size: 2rem;
-}
-
-h3 {
-  font-size: 1.6rem;
-}
-
-h4 {
+#Beschreibung h4 {
   font-size: 1.4rem;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
-p {
-  font-size: 1.2rem;
+#Beschreibung p {
+  font-size: 1.1rem;
 }
 
-#Beschreibung img, iframe {
+.img-container, iframe{
+  /*height: 1000px; /* [1.1] Set it as per your need */
+  overflow: visible; /* [1.2] Hide the overflowing of child elements */
   margin-top: 30px;
   margin-bottom: 30px;
+  cursor: pointer;
+}
+.img-container img {
+  transition: transform .25s ease;
+}
+.zoomed {
+  transform: scale(2.7);
 }
 
 #Beschreibung ul {
@@ -60,6 +74,15 @@ p {
   font-size: 1.2rem;
 }
 
+.break {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid var(--text_hell);
+  margin-bottom: 20px;
+}
+
+
+/* Links ========================================================================================== */
 #Links {
   display: flex;
   margin: 4rem 0;
@@ -79,11 +102,4 @@ p {
   background-color: var(--hintergrund_dunkel);
   border: var(--text_hover) solid 2px;
   transition-duration: 200ms;
-}
-
-.break {
-  width: 100%;
-  height: 1px;
-  border-bottom: 1px solid var(--text_hell);
-  margin-bottom: 10px;
 }
