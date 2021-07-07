@@ -52,17 +52,18 @@ h2, h3, h4 {
 }
 
 .img-container, iframe{
-  /*height: 1000px; /* [1.1] Set it as per your need */
-  overflow: visible; /* [1.2] Hide the overflowing of child elements */
+  overflow: visible;
   margin-top: 30px;
   margin-bottom: 30px;
   cursor: pointer;
 }
+
 .img-container img {
   transition: transform .25s ease;
 }
+
 .zoomed {
-  transform: scale(2.7);
+  transform: scale(2.5);
 }
 
 #Beschreibung ul {

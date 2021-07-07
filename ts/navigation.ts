@@ -4,14 +4,12 @@ if (document.title == "Home | Sebastian Braun") path = "./pages";
 else path = "../pages";
 
 document.getElementById("haupt-nav").insertAdjacentHTML("afterend", `
-<header id="sub-nav" class="unsichtbar">
-  <nav>
-    <li class="nav-link"><a class="link-text" href="${path}/led_beleuchtung.html">LED Beleuchtung</a></li>
-    <li class="nav-link"><a class="link-text" href="${path}/led_matrix.html">LED Matrix</a></li>
-    <li class="nav-link"><a class="link-text" href="${path}/nixie_uhr.html">Nixie Uhr</a></li>
-    <li class="nav-link"><a class="link-text" href="${path}/rustuino.html">Rustuino</a></li>
-  </nav>
-</header>
+<nav id="sub-nav" class="unsichtbar">
+  <a class="nav-link" href="${path}/led_beleuchtung.html">LED Beleuchtung</a>
+  <a class="nav-link" href="${path}/led_matrix.html">LED Matrix</a>
+  <a class="nav-link" href="${path}/nixie_uhr.html">Nixie Uhr</a>
+  <a class="nav-link" href="${path}/rustuino.html">Rustuino</a>
+</nav>
 `);
 
 
@@ -25,14 +23,13 @@ dropdown.onclick = () => {
   if (dropdown_icon.innerText == "+"){
     dropdown_icon.innerText = "-";
     haupt_nav.classList.remove("schatten");
-    sub_nav.classList.add("schatten");
-    sub_nav.classList.remove("unsichtbar");
+    haupt_nav.style.boxShadow = "none";
+    sub_nav.style.display = "flex";
   }
   else{
     dropdown_icon.innerText = "+";
-    haupt_nav.classList.add("schatten");
-    sub_nav.classList.remove("schatten");
-    sub_nav.classList.add("unsichtbar");
+    haupt_nav.style.boxShadow = "5px 5px 8px #B6B6B6"
+    sub_nav.style.display = "none";
   }
 }
 

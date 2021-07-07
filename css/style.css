@@ -27,54 +27,53 @@ body {
 
 /* ----- Navbar ----- */
 #haupt-nav {
+  background-color: var(--hintergrund_dunkel);
+  height: 90px;
   display: flex;
   justify-content: space-between;
-  padding: 10px 100px;
-  background-color: var(--hintergrund_dunkel);
+  align-items: center;
 }
 
-#haupt-nav nav {
-  display: flex;
-}
-
-#sub-nav nav {
-  display: flex;
-  height: 70px;
+#sub-nav {
   background-color: var(--hintergrund_dunkel);
   border-top: var(--highlight_text) 1px solid;
-  padding: 10px 0;
+  box-shadow: 5px 5px 8px var(--text_hell);
+  height: 75px;
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#logo {
+  margin-right: auto;
+  margin-left: 100px;
 }
 
 .nav-link {
-  display: flex;
-  list-style: none;
-  padding: 0 6px;
-}
-
-.link-text {
+  height: 70%;
+  padding: 0 10px;
+  margin: 0 3px;
   display: flex;
   align-items: center;
+  border-radius: 5px;
   text-decoration: none;
   color: var(--text_hell);
   font-size: 1.4rem;
-  font-weight: bold;
-  padding: 0 10px;
+  font-weight: bold; 
 }
 
-.link-text:hover {
+#haupt-nav .nav-link:last-of-type {
+  margin-right: 100px;
+}
+
+#sub-nav .nav-link:first-of-type {
+  margin-left: 25px;
+}
+
+.nav-link:hover {
   color: var(--text_hover);
   background-color: var(--hintergrund_hover);
   transition-duration: 250ms;
-}
-
-
-/* ----- Script Elemente ----- */
-.unsichtbar {
-  display: none;
-}
-
-.schatten {
-  box-shadow: 5px 5px 8px var(--text_hell);
 }
 
 
