@@ -46,7 +46,9 @@
       <p>Auf die Fourier Transformation möchte ich in einem seperaten Artikel nochmal ganuer eingehen, weil dieses Thema sehr komplex ist und ich hier in erster Linie die Matrix und Steuerung dokumentieren will.</p>
       <br>
       <p>Der Arduino sollte also die Messpunkte mit dem integrierten AD Wandler aufnehmen, diese mit dem FFT Algorythmus verarbeiten und das Ergebnis auf der Matrix ausgeben. Dafür habe ich einen kleinen Prototypen gebaut. Dieser hat auch perfekt funktioniert.</p>
-      <div class="img-container"><img src="../img/uv_prototyp.mp4" alt="Matrix Prototyp" width="500"/></div>
+      <br>
+      <video src="https://github.com/SebastianBraun01/SebastianBraun01.github.io/raw/master/img/uv_prototyp.mp4" width="600" controls muted preload></video>
+      <br>
       <p>Diese Herangehensweise hat nur einen Haken. Je größer die Matrix, desto langsamer wird die Wiederholrate der Anzeige, weil die Berechnungen und das Ansteuern der Matrix Zeit brauchen und nicht parallel ablaufen können. Mit diesem kleinen Prototypen ist das noch kein Problem, aber wenn ich die große Matrix mit dieser Steuerung betreibe, habe ich nur noch eine Diashow.</p>
       <h3>Matrix</h3>
       <p>Für die Matrix verwende ich, wie bei den LED Streifen auch, die WS2812B RGB LEDs (Neopixel). Jeder Spalte bildet ein Frequenzband. Im aktuellen Enwurf liegt die Größe bei 32 Spalten auf einer Höhe von 20 LEDs. Die einzelnen Kacheln sind 7cm auf 7cm. Die LEDs jeder Spalte werden in Serie verkabelt, sodass jede Spalte parallel angesteuert werden kann.</p>
