@@ -24,54 +24,56 @@
 
   <!-- Hauptseite -->
   <main>
-    <canvas id="canvas"></canvas>
+    <div class="container">
+      <canvas id="canvas"></canvas>
 
-    <section id="Projektkarten">
-      <article class="Karte">
-        <div>
-          <h3>LED Beleuchtung</h3>
-          <p>Einstellbare Beleuchtung mit Neopixel LED Streifen. Mehreren Arduinos zur Ansteuerung unter benutzung der Blynk Bibliothek.</p>
-          <br>
-          <a href="./pages/led_beleuchtung.html" class="button">Mehr Info</a>
-        </div>
-        <img src="" alt="led_beleuchtung">
-      </article>
-
-      <article class="Karte">
-        <div>
-          <h3>LED Matrix</h3>
-          <p>Musik Spektrograph mit einer FPGA basierten Steuerung, die mit dem LED-Beleuchtungs-Netzwerk kommunizieren kann.</p>
-          <br>
-          <a href="./pages/led_matrix.html" class="button">Mehr Info</a>
-        </div>
-        <img src="" alt="led_matrix">
-      </article>
-
-      <article class="Karte">
-        <div>
-          <h3>Nixie Uhr</h3>
-          <p>Freistehende, digitale Uhr basierend auf IN-8 Nixie Röhren mit eigens entworfenem Schaltnetzteil. Kann übers Handy gesteuert werden.</p>
-          <br>
-          <a href="./pages/nixie_uhr.html" class="button">Mehr Info</a>
-        </div>
-        <img src="" alt="nixie_uhr">
-      </article>
-
-      <article class="Karte">
-        <div>
-          <h3>Rustuino</h3>
-          <p>Arduino ähnliches Framework für die Programmiersprache Rust. Wird in Zusammenarbeit mit meinem MCT-Professor und einem Kollegen an der Hochschule Augsburg entwickelt.</p>
-          <br>
-          <a href="./pages/rustuino.html" class="button">Mehr Info</a>
-        </div>
-        <img src="img/rust_logo.png" alt="rustuino" width="130" height="130">
-      </article>
-    </section>
+      <section id="Projektkarten">
+        <article class="Karte">
+          <div>
+            <h3>LED Beleuchtung</h3>
+            <p>Einstellbare Beleuchtung mit Neopixel LED Streifen. Mehreren Arduinos zur Ansteuerung unter benutzung der Blynk Bibliothek.</p>
+            <br>
+            <a href="./pages/led_beleuchtung.html" class="button">Mehr Info</a>
+          </div>
+          <img src="" alt="led_beleuchtung">
+        </article>
+  
+        <article class="Karte">
+          <div>
+            <h3>LED Matrix</h3>
+            <p>Musik Spektrograph mit einer FPGA basierten Steuerung, die mit dem LED-Beleuchtungs-Netzwerk kommunizieren kann.</p>
+            <br>
+            <a href="./pages/led_matrix.html" class="button">Mehr Info</a>
+          </div>
+          <img src="" alt="led_matrix">
+        </article>
+  
+        <article class="Karte">
+          <div>
+            <h3>Nixie Uhr</h3>
+            <p>Freistehende, digitale Uhr basierend auf IN-8 Nixie Röhren mit eigens entworfenem Schaltnetzteil. Kann übers Handy gesteuert werden.</p>
+            <br>
+            <a href="./pages/nixie_uhr.html" class="button">Mehr Info</a>
+          </div>
+          <img src="" alt="nixie_uhr">
+        </article>
+  
+        <article class="Karte">
+          <div>
+            <h3>Rustuino</h3>
+            <p>Arduino ähnliches Framework für die Programmiersprache Rust. Wird in Zusammenarbeit mit meinem MCT-Professor und einem Kollegen an der Hochschule Augsburg entwickelt.</p>
+            <br>
+            <a href="./pages/rustuino.html" class="button">Mehr Info</a>
+          </div>
+          <img src="img/rust_logo.png" alt="rustuino" width="130" height="130">
+        </article>
+      </section>
+    </div>
   </main>
 
 
   <!-- Javascript Animation -->
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
-  <!-- <script defer src="./ts/out/script.js"></script> -->
+  <script defer src="./ts/out/script.js"></script>
 </body>
 </html>

@@ -1,29 +1,36 @@
 main {
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-#canvas {
-  margin-top: 50px;
+.container {
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+
+/* ----- Projektkarten ----- */
 #Projektkarten {
+  padding: 100px 0;
   display: grid;
   grid-template-columns: auto auto;
-  gap: 100px;
-  padding: 100px;
+  gap: 70px;
 }
 
 .Karte {
-  display: flex;
-
   padding: 20px;
-  border: var(--hintergrund_dunkel) 1px solid;
   color: var(--text_hell);
   background-color: var(--hintergrund_dunkel);
-  box-shadow: 5px 5px 8px black;
+  border: var(--hintergrund_dunkel) 1px solid;
   border-radius: 5px;
+  box-shadow: 5px 5px 8px black;
+  display: flex;
 }
 
 .Karte p {
@@ -43,5 +50,25 @@ main {
 .button:hover {
   color: var(--text_hover);
   background-color: var(--hintergrund_hover);
-  transition-duration: 250ms;
+  transition: .25s linear;
+}
+
+
+/* ----- Media Quaries ----- */
+@media(max-width: 780px) {
+  main {
+    margin-top: 0;
+  }
+
+  #canvas {
+    display: none;
+  }
+
+  #Projektkarten {
+    padding: 0 50px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    grid-template-columns: auto;
+    gap: 50px;
+  }
 }

@@ -40,7 +40,6 @@ body {
 
 #sub-nav {
   background-color: var(--hintergrund_dunkel);
-  border-bottom: var(--text_dunkel) 1px solid;
   box-shadow: 5px 5px 8px var(--text_hell);
   height: 75px;
   display: flex;
@@ -92,7 +91,7 @@ body {
   #haupt-nav {
     box-shadow: none;
     position: fixed;
-    bottom: 252px;
+    bottom: 250px;
     width: 100%;
     height: auto;
     display: flex;
@@ -114,7 +113,6 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9;
-    border-bottom: var(--text_hover) 2px solid;
   }
 
   #mobile-nav {
@@ -142,16 +140,22 @@ body {
     border-radius: 0;
     display: flex;
     justify-content: center;
-    margin: 0;
-    padding: 0;
   }
 
-  .nav-link:not(#sub-nav .nav-link:first-of-type) {
+  .nav-link:not(#mobile-dropdown) {
     border-bottom: var(--text_hell) 1px solid;
   }
   
   #haupt-nav, #sub-nav {
     transition: transform 0.25s linear;
+  }
+
+  #haupt-nav .nav-link:nth-of-type(3) {
+    margin-right: 0;
+  }
+  
+  #sub-nav .nav-link:first-of-type {
+    margin-left: 0;
   }
 
   .active {
