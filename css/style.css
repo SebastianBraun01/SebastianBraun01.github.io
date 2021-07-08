@@ -28,20 +28,25 @@ body {
 /* ----- Navbar ----- */
 #haupt-nav {
   background-color: var(--hintergrund_dunkel);
+  box-shadow: 5px 5px 8px var(--text_hell);
   height: 90px;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 9;
+  transition: box-shadow 0.15s linear;
 }
 
 #sub-nav {
   background-color: var(--hintergrund_dunkel);
-  border-top: var(--highlight_text) 1px solid;
+  border-top: var(--text_dunkel) 1px solid;
   box-shadow: 5px 5px 8px var(--text_hell);
   height: 75px;
-  display: none;
+  display: flex;
   justify-content: flex-start;
   align-items: center;
+  transition: transform 0.15s linear;
 }
 
 #logo {
@@ -62,7 +67,7 @@ body {
   font-weight: bold; 
 }
 
-#haupt-nav .nav-link:last-of-type {
+#haupt-nav .nav-link:nth-of-type(4) {
   margin-right: 100px;
 }
 
@@ -76,19 +81,85 @@ body {
   transition-duration: 250ms;
 }
 
+#mobile-nav {
+  display: none;
+}
+
 
 /* ----- Media Query ----- */
-@media(max-width: 850px) {
-  header {
+@media(max-width: 780px) {
+  #haupt-nav {
+    box-shadow: none;
     position: fixed;
-    width: 100vw;
+    bottom: 252px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: none;
   }
 
-  #haupt-nav nav {
-    height: 70px;
+  #sub-nav {
+    border: none;
+    box-shadow: none;
+    position: fixed;
+    bottom: 50px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+    border-top: var(--text_hover) 2px solid;
   }
 
-  #haupt-nav #logo-container {
+  #mobile-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    background-color: var(--hintergrund_dunkel);
+    z-index: 10;
+  }
+
+  #logo {
     display: none;
+  }
+
+  #dropdown {
+    display: none;
+  }
+
+  .nav-link {
+    width: 100%;
+    height: 50px;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link:not(#sub-nav .nav-link:first-of-type) {
+    border-top: var(--text_hell) 1px solid;
+  }
+  
+  #haupt-nav, #sub-nav {
+    transition: transform 0.25s linear;
+  }
+
+  .active {
+    transform: translateY(400px);
+  }
+}
+
+@media(min-width: 781px) {
+  #sub-nav.active {
+    transform: translateY(-180px);
   }
 }
