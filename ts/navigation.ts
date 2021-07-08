@@ -12,7 +12,7 @@ document.getElementById("haupt-nav").insertAdjacentHTML("afterend", `
 </nav>
 
 <nav id="mobile-nav">
-  <a class="nav-link" href="#" id="mobile-dropdown">+Menu</a>
+  <div class="nav-link" id="mobile-dropdown">+Menu</div>
 </nav>
 `);
 

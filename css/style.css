@@ -40,7 +40,7 @@ body {
 
 #sub-nav {
   background-color: var(--hintergrund_dunkel);
-  border-top: var(--text_dunkel) 1px solid;
+  border-bottom: var(--text_dunkel) 1px solid;
   box-shadow: 5px 5px 8px var(--text_hell);
   height: 75px;
   display: flex;
@@ -64,10 +64,11 @@ body {
   text-decoration: none;
   color: var(--text_hell);
   font-size: 1.4rem;
-  font-weight: bold; 
+  font-weight: bold;
+  cursor: pointer;
 }
 
-#haupt-nav .nav-link:nth-of-type(4) {
+#haupt-nav .nav-link:nth-of-type(3) {
   margin-right: 100px;
 }
 
@@ -113,7 +114,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9;
-    border-top: var(--text_hover) 2px solid;
+    border-bottom: var(--text_hover) 2px solid;
   }
 
   #mobile-nav {
@@ -146,7 +147,7 @@ body {
   }
 
   .nav-link:not(#sub-nav .nav-link:first-of-type) {
-    border-top: var(--text_hell) 1px solid;
+    border-bottom: var(--text_hell) 1px solid;
   }
   
   #haupt-nav, #sub-nav {
