@@ -53,19 +53,19 @@
       <p>Für die Matrix verwende ich, wie bei den LED Streifen auch, die WS2812B RGB LEDs (Neopixel). Jeder Spalte bildet ein Frequenzband. Im aktuellen Enwurf liegt die Größe bei 32 Spalten auf einer Höhe von 20 LEDs. Die einzelnen Kacheln sind 7cm auf 7cm. Die LEDs jeder Spalte werden in Serie verkabelt, sodass jede Spalte parallel angesteuert werden kann.</p>
       <br>
       <p>Matrix wird noch gebaut. Das ist aktuelle CAD Entwurf:</p>
-      <div class="img-container"><img src="../img/matrix_konstruktion.png" alt="Matrix CAD" width="500"/></div>
-      <div class="img-container"><img src="" alt="Matrix Verkabelung" width="500"/></div>
+      <div class="img-container"><img src="../img/matrix_konstruktion.png" alt="Matrix CAD"/></div>
+      <div class="img-container"><img src="" alt="Matrix Verkabelung"/></div>
       <h3>Arduino</h3>
       <p>Das Arduino Board, das ich hier verwende, ist nicht so verbreitet wie der UNO oder NANO aber perfekt für Signalverarbeitung. Der MKR Vidor 4000 ist ein Development Board, auf dem ein Mikrocontroller (SAM21) und ein FPGA (Intel Cyclone 10) verbaut sind.</p>
       <br>
       <p>Ein FPGA ist ideal für dieses Projekt, da ich alle Aufgaben (außer das samplen mit dem ADC) auf dem FPGA parallel betreiben und wie eine Pipeline behandeln kann. Das ist vor allem für die Ansteuerung der Matrix wichtig, da ich jetzt nicht einen einzelnen großen Streifen ansteuern muss, der die Matrix bildet, sondern für jede einzelne Spalte der Matrix, einen seperaten Streifen benutzen und alle parallel ansteuern kann.</p>
-      <div class="img-container"><img src="../img/vidor.jpg" alt="MKR Vidor 4000" width="500"/></div>
+      <div class="img-container"><img src="../img/vidor.jpg" alt="MKR Vidor 4000"/></div>
       <p>Der Mikrocontroller gibt ein 24MHz Taktsignal für den FPGA aus. Das sollte für die Berechnung reichen, da für die parallele Ansteuerung ein wesentlich niedrigeres Taktsignal ausreicht.</p>
       <h3>Audiosampling</h3>
       <p>Die Musik muss so vorbereitet werden, dass sie von den AD-Wandlern des Arduinos gemessen und verarbeitet werden kann. Der Arduino hat einen Messbereich von 0V bis 5V und kann keine negativen Spannungen messen. Der Klinkenstecker eines Handys schafft etwa ±150mV.</p>
       <br>
       <p>Ich hab also einen Audio Verstärker entworfen, der die Spitzen von bis zu 150mV auf Spitzen von bis zu 2.5V verstärken kann und der Ausgangsspannung einen Offset von 2.5V gibt. Somit bewegt sich die Spannung um den Mittelpunkt des Messbereiches von 0V bis 5V. Ich verwende einen ICL7660 Spannungsinvertierer/-converter um den Operationsverstärker zu versorgen.</p>
-      <div class="img-container"><img src="../img/verstärker_schaltung.png" alt="Verstärkerschaltung" width="500"/></div>
+      <div class="img-container"><img src="../img/verstärker_schaltung.png" alt="Verstärkerschaltung"/></div>
       <h3>Signalverarbeitung</h3>
       <p>Der Arduino nimmt mit dem integrierten AD Wandler die Messpunkte auf und überträgt diese mit UART auf den FPGA. Dieser verarbeitet mit die Messpunkte mit dem FFT Algorythmus und Steuert die Spalten der Matrix mit dem Ergebnis an.</p>
       <br>
@@ -83,28 +83,32 @@
       <li>FFT: FFT Megafunktion (von Gisselquist, Link unten)</li>
       <li>spektrometer: Top-Modul für das FPGA programm, bindet alle obigen Sub-Module ein</li>
       </ul>
-      <div class="img-container"><img src="" alt="Diagramm Programmaufbau" width="500"></div>
+      <div class="img-container"><img src="" alt="Diagramm Programmaufbau"></div>
       <h3>Neopixel Treiber</h3>
       <p>Die Basis der Anzeige ist der npxl_treiber. Dieses Modul ließt den 24Bit Farbcode für jede LED ein und sendet alles an den Streifen. Ist das Ende des Streifens errecht wird die Datenleitung für 50µs auf GND gezogen um die Farben anzuzeigen. Im inneren des Moduls befindet sich ein Automatenkonstrukt, das das Lesen und Senden der einzelnen Bits koordiniert.</p>
       <br>
       <p>Wird der die <b>send</b> Leitung aktiviert, gibt der Block an <b>o_color_reg</b> eine Speicheradresse aus, die dem Index der LED entspricht. Ist ein Speicher mit dem Modul verbunden, werden die Farbdaten, die am Eingang <b>i_color_data</b> anliegen in ein Puffer-Register eingelesen und der Reihe nach an <b>o_npxl_data</b> ausgegeben. In der Definition des Blocks wird fest vorgegeben, wie viele LEDs er abarbeiten muss.</p>
       <iframe src="../img/npxl_treiber_rtl.pdf" width="850" height="550">npxl_treiber Block</iframe>
+      <a href="../img/npxl_treiber_rtl.pdf" class="Link-Button Inline-Link">npxl_treiber Schaltbild</a>
       <p>Wenn der Block über die Speicheradressen looped, gibt er deren Inhalt an die LED-Streifen aus. Für jedes Bit, das ausgegeben wird, gibt es Timing Bedingungen, die bestimmen ob eine 1 oder 0 gesendet wird. Diese Zeiten können dem Datenblatt entnommen werden. Fürs erste wird an den Treiberblock nur ein ROM angeschlossen sein, das feste Farbdaten enthält, aber zulässt, dass nur LEDs bis zu einer bestimmten Höhe erleuchtet werden.</p>
       <iframe src="../img/ws2812b_datasheet.pdf" width="800" height="800">Neopixel Datenblatt</iframe>
+      <a href="../img/ws2812b_datasheet.pdf" class="Link-Button Inline-Link">WS2812B Datenblatt</a>
       <h3>Neopixel Controller</h3>
       <p>Der npxl_controller importiert den npxl_treiber und ein ROM Modul. Die Außführung dieses Modul kann sich in der Zukunft noch ändern. In seiner jetzigen Form aber ließt es einen Höhenwert ein und lässt dementsprechend viele LEDs mit einer festen Farbe in einer Spalte aufleuchten. Das bildet die Pegelanzeige für das Ergebnis der FFT Operation.</p>
       <br>
       <p>Das ROM besitzt doppelt so viele Speicheradressen, wie sich LEDs in der Spalte befinden. Die untere Hälfte der Adressen sind mit den Farben für die LEDs beschrieben. In der oberen Hälfte stehen nur Nullen. Die Farbdaten werden vom npxl_treiber von dem ROM ausgelesen. Ist der Höhenwert erreicht, wird der Adresse des npxl_treiber ein Offset hinzugefügt, das den Block den oberen Adressraum des ROMs lesen lässt, also die LEDs ausschaltet.</p>
       <iframe src="../img/npxl_controller_rtl.pdf" width="850" height="550">npxl_controller Block</iframe>
+      <a href="../img/npxl_controller_rtl.pdf" class="Link-Button Inline-Link">npxl_controller Schaltbild</a>
       <h3>UART RX</h3>
       <p>Das uart_rx Modul ist dafür zuständig, die Samples vom Mikrocontroller zu empfangen und über ein Register zur FFT Megafunktion weiterzuleiten. Das Protokoll für UART ist relativ einfach aufgebaut.</p>
       <br>
       <p>Sender und Empänger müssen im Vorfeld die gleichen Einstellungen für die Übertragung haben. Die Sendegeschwindigkeit, oder Baudrate (hier 115200), die Anzahl der Bits (hier 8) und ob ein Partäts-Bits vewendet wird. Der Ausgangszustand für UART ist HIGH (5V). </p>
       <br>
       <p>Zuerst wird eine Startbedingung bzw. ein Startbit gesendet. Dies zeichnet sich durch eine negative Taktflanke aus mit einer Haltezeit, die der Baudrate entspricht. Wenn das UART Startbit erkannt wird, erwartet der Empfänger 8 Datenbits und prüft dann ob ein Stopbit gesendet wurde, um die Übertragung zu bestätigen. Diese werden immer im Mittelpunkt der Taktzeit gescant.</p>
-      <div class="img-container"><img src="../img/uart_protokoll.png" alt="UART Protokoll" width="500"/></div>
+      <div class="img-container"><img src="../img/uart_protokoll.png" alt="UART Protokoll"/></div>
       <p>Nach einer erfolgreichen Übertragung liegen die Daten am Ausgangsregister an und ein data-valid Signal wird gesetzt. Intern wird die Koordination dieser Schritte über ein Automatenkonstrukt geregelt.</p>
       <iframe src="../img/uart_rx_rtl.pdf" width="850" height="550">uart_rx Block</iframe>
+      <a href="../img/uart_protokoll.png" class="Link-Button Inline-Link">uart_rx Schaltbild</a>
       <h3>FFT Megafunktion</h3>
       <p>Eine Hardwarebasierte FFT Operation zu entwerfen ist eine große und sehr komplizierte Aufgabe. Um mir die Arbeit zu erleichtern habe ich nach einem vorhandenen FFT Kern gesucht.</p>
       <br>
@@ -154,11 +158,11 @@
       <p>Neben den optimalen Parametern für mein Projekt, habe ich noch einen Wrapper um den Kern herum entworfen. Der Kern ist als Pipeline konfiguriert mit nur minimalen Steuersignalen. Damit ich ein gewisses Maß an Flowcontroll mit dem Kern habe, möchte ich ihn in einer Burst Konfiguration benutzen.</p>
       <br>
       <p>Der Kern erwartet einen kontinuierlichen Strom von Datensamples und gibt die Berechneten Punkte kontinuierlich aus. Es gibt nur ein Kontroll-Signal, mit dem die Berechnungen unterbrochen werden können. Für die Koordination mit den LED Treibern brauche ich Signale, die Anfang und Ende des Blocks aus 512 Samplen markieren.</p>
-      <div class="img-container"><img src="../img/fft-ports.svg" alt="FFT Kern Ports" width="500"/></div>
+      <div class="img-container"><img src="../img/fft-ports.svg" alt="FFT Kern Ports"/></div>
       <p>Mit dem Wrapper wiederum wartet der Kern nun bis er alle Samples für eine Berechnung hat, dann werden alle Messpunkte umgerechnet. Während des Berechnungsphase werden keine neuen Samples angenommen. Ist die Berechnung fertig, wird das Ergebniss ausgegeben und neue Samples können eingegeben werden. Es wird also immer Etappenweise oder in Burst Konfiguration gerechnet.</p>
       <br>
       <p>Zusätzlich hat der Wrapper noch Signale, die anzeigen wann er rechnet und wann Daten geschrieben und gelesen werden können. Als Input nimmt der Block 8 Bit breite Datensamples für jewails die Realen und Komplexen Werte, also 16 Bit. Die Komplexen Werte sind für meine Anwendung nicht relevant, da ich keine genauen Rechenwerte erzielen will, sondern nur einen tollen Effekt zur Musik.</p>
-      <div class="img-container"><img src="" alt="FFT Block" width="500"/></div>
+      <div class="img-container"><img src="" alt="FFT Block"/></div>
       <h3>Spektrometer</h3>
       <p>Das spektrometer Modul fügt alle Bausteine zusammen und ist das Modul, das letztendlich auf den FPGA geflasht wird. Alle Module koordinieren sich untereinander mit Ready- und Startsignalen. Zwischen dem Output der FFT Funktion und den Eingängen der npxl_controller befindet sich noch ein Verteiler, der einen Datensatz einließt und diesem ausgewählte Punkte entnimmt, die auf der Matrix angezeigt werden sollen, denn die Matrix hat eine Breite von 32 Streifen auf der 512 Datenpunkte verteilt werden.</p>
       <h2>Sourcecode</h2>

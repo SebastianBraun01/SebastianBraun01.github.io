@@ -46,6 +46,7 @@
       <div class="img-container"><img src="../img/neopixel_pins.jpg" alt="Neopixel Anschlüsse" style="width: 300px;"/></div>
       <p>Das Senden von Bits geschieht über Taktpulse. Deren Dauer bestimmt ob eine 0 oder 1 gesendet wurde. Sind alle Daten übertragen wird die Datenleitung für eine bestimmte Zeit auf GND gehalten, was für die LEDs heißt, dass die Farbdaten im Puffer angezeigt werden sollen. Die Taktzeigen und Farbcodes können im Datenblatt nachgelesen werden.</p>
       <iframe src="../img/ws2812b_datasheet.pdf" height="800">Datenblatt WS2812B</iframe>
+      <a href="../img/ws2812b_datasheet.pdf" class="Link-Button Inline-Link">WS2812B Datenblatt</a>
       <h3>Arduino</h3>
       <p>Für die Steuerung der einzelnen Streifen kommen Arduino Nano 33 IOTs zum Einsatz. Diese haben einen kleinen Formfakter und bringen über den WIFI-NINA Chip eine WLAN und Bluetooth Verbindung mit. Jeder Streifen bekommt eine eigene Steuerung und alle sollen dann untereinander über WLAN vernetzt werden.</p>
       <h3>Schaltung</h3>
@@ -64,10 +65,10 @@
       <h3>PlatformIO</h3>
       <p>Zur Programmierung des Arduinos verwende ich nicht mehr die traditionelle Arduino IDE sondern ein IDE Plugin namens PlatformIO. Das ist für die erweiterbaren Texteditoren Visual Studio Code und Atom verfügbar und kann als Erweiterung intstalliert werden.</p>
       <p>Einstellungen wie das Board und verwendete Bibliotheken werden in der IDE werden per Projekt gesetzt, in der platiformio.ini Konfigurationsdatei.</p>
-      <pre><code class="language-TOML">
-; PlatformIO Project Configuration File
+
+      <pre><code class="language-TOML line-numbers">; PlatformIO Project Configuration File
 ;
-; Please visit documentation for the other options and examples 
+; Visit documentation for other options and examples 
 ; https://docs.platformio.org/page/projectconf.html
     
 [env:nano_33_iot]
@@ -77,35 +78,39 @@ framework = arduino
 lib_deps = 
   blynkkk/Blynk@^0.6.7
   adafruit/Adafruit NeoPixel@^1.7.0
-  arduino-libraries/WiFiNINA@^1.8.1
-      </code></pre>
+  arduino-libraries/WiFiNINA@^1.8.1</code></pre>
+
       <h3>Neopixel Bibliothek</h3>
       <p>Um das Ansteuern der Neopixel mit dem Arduino zu erleichtern, stellt Adafruit die Neopixel Bibliothek bereit. Jedem Streifen am Arduino wird ein C++ Objekt zugeordnet, das alle Daten zur Ansteuerung enthält (Länge, Typ, Farbode, …).</p>
-      <pre><code class="language-c++">
-#define LED_PIN 1
+
+      <pre><code class="language-c++ line-numbers">#define LED_PIN 1
 #define LED_COUNT 240
       
-Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
-// NEO_KHZ800  800 KHz bitstream (most NeoPixel products w/WS2812 LEDs)
-// NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
-// NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
-// NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
-// NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
-      </code></pre>
+Adafruit_NeoPixel strip(
+  LED_COUNT,
+  LED_PIN,
+  NEO_GRB + NEO_KHZ800
+);
+// NEO_KHZ800 800 KHz bitstream (most NeoPixel products)
+// NEO_KHZ400 400 KHz ('v1' FLORA pixels, WS2811 drivers)
+// NEO_GRB    GRB bitstream (most NeoPixel products)
+// NEO_RGB    RGB bitstream (v1 FLORA pixels, not v2)
+// NEO_RGBW   RGBW bitstream (NeoPixel RGBW products)</code></pre>
+
       <p>Um die Farben der LEDs einzustellen ruft man die Methode <b>setPixelColor()</b> des Streifen auf, den man bearbeiten will. <b>n</b> ist der Index der LED (<b>n = 0</b> für die erste, <b>n = 1</b> für die zweite, …). <b>red</b>, <b>green</b> und <b>blue</b> sind die Farbwerte und gehen von 0 bis 255. Wenn alle Farben eingestellt sind kann man mit <b>show()</b> alles anzeigen lassen. <b>numPixels()</b> gibt mir die Anzahl der LEDs im Streifen zurück.</p>
       <br>
       <p>Wenn ich z.B den halben Streifen Rot färben will, gehe ich wie folgt vor:</p>
-      <pre><code class="language-c++">
-// strip.setPixelColor(n, red, green, blue);
+
+      <pre><code class="language-c++ line-numbers">// strip.setPixelColor(n, red, green, blue);
       
 for (int i = 0; i &lt; strip.numPixels() / 2; i++) {
   strip.setPixelColor(i, 255, 0, 0);
 }
-strip.show();
-      </code></pre>
+strip.show();</code></pre>
+
       <p>So lassen sich auch komplexere Effekte programmieren. Zum Beispiel möchte ich jetzt, dass sich der Streifen langsam mit Rot füllt und dann wieder zurückwandert:</p>
-      <pre><code class="language-c++">
-for (int i = 0; i &lt; strip.numPixels(); i++) {
+
+      <pre><code class="language-c++ line-numbers">for (int i = 0; i &lt; strip.numPixels(); i++) {
   strip.setPixelColor(i, 255, 0, 0);
   strip.show();
   delay(50);
@@ -115,15 +120,15 @@ for (int i = strip.numPixels(); i &gt; 0; i--) {
   strip.setPixelColor(i, 0, 0, 0);
   strip.show();
   delay(50);
-}
-      </code></pre>
+}</code></pre>
+
       <h3>Blynk Bibliothek</h3>
       <h4>Arduino Code</h4>
       <p>Die Blynk Bibliothek ermöglicht es, dass die einzelnen Streifen untereinander kommunizieren und dass ich die Farben und Effekte mit meinem Handy einstellen kann. Die Arduinos kommunizieren über "virtuelle pins", diese können alle möglichen Datentypen zwischen den Geräten transportieren. Das funktioniert in der Form eines "Publish-Subscribe-Modells".</p>
       <br>
       <p>Um den Datentransfer zu ermöglichen, wird jeder Arduino in der App registriert und erhält einen Athentication-Token. Dieser wird zusammen mit den WLAN-Daten in den Arduino eingetragen:</p>
-      <pre><code class="language-c++">
-char auth[] = "irgendeintoken";
+
+      <pre><code class="language-c++ line-numbers">char auth[] = "irgendeintoken";
 char ssid[] = "wlanname";
 char pass[] = "wlanpasswort";
     
@@ -133,36 +138,38 @@ void setup() {
 }
       
 void loop() {
-  Blynk.run();  // Hält die Verbindung aufrecht -> regelmäßig aufrufen!
-}
-      </code></pre>
+  // Verwaltet Verbindung -> regelmäßig aufrufen!
+  Blynk.run();
+}</code></pre>
+
       <p>Ein Gerät kann darauf achten ob auf einem virtuellen pin Daten gesendet werden. Ist das der Fall, wird eine Callback-Funktion ausgeführt, die irgendwie auf die Daten reagiert. Dementsprechend kann jedes Gerät irgendwelche Daten auf einem virtuellen pin senden, unabhängig davon ob andere Geräte zuhöhren oder nicht:</p>
-      <pre><code class="language-c++">
-// Sende daten zur App über virtuelle pins
+
+      <pre><code class="language-c++ line-numbers">// Sende daten zur App über virtuelle pins
 Blynk.virtualWrite(V1, true);
 Blynk.virtualWrite(V2, 123);
 Blynk.virtualWrite(V3, "abc");
       
 BLYNK_WRITE(V0) {
-  // code wird ausgeführt wenn sich der wert des virtuellen pins V0 ändert
+  // wird ausgeführt, wenn sich der Wert von V0 ändert
 }
       
 BLYNK_READ(V4) {
-  // arduino wird von der app angefragt, interne daten über V4 zur app zu senden
-}
-      </code></pre>
+  // Anfrage der App, interne Daten über V4 zur App zu senden
+}</code></pre>
+
       <p>Jeder Arduino kann auf einem virtuellen pin eine Callback-Funktion haben. Der Unterschied besteht darin, wenn der Arduino Daten zur App oder zu anderen Arduinos senden will. Wenn Daten werden mit der Methode <b>Blynk.virtualWrite()</b> zur App gesendet. Wenn Daten zu einem bestimmten Arduino sollen, muss man den Arduino mit seinem eigenen Authentication-Token anzielen:</p>
-      <pre><code class="language-c++">
-char auth_other_arduino[] = "3oth90ga4o3gp09aqw8h43t0ngpw";
+    
+      <pre><code class="language-c++ line-numbers">char auth_other_arduino[] = "3oth90ga4o3gp09aqw8h43t0ngpw";
 WidgetBridge bridge(V5);
       
 void setup() {
   // Andere initialisierungen...
   bridge.setAuthToken(auth_other_arduino);
-  bridge.digitalWrite(2, HIGH); // Digitale Pins des anderen Arduinos steuern
+  // Digitale Pins des anderen Arduinos steuern
+  bridge.digitalWrite(2, HIGH); 
   bridge.virtualWrite(V4, "test");
-}
-      </code></pre>
+}</code></pre>
+
       <h4>App</h4>
       <p>In der App kann man mit Widgets ein Controll-Dashboard erstellen. Man hat die Auswahl zwischen Buttons, Slider, Anzeigen, Terminals, usw. Jedes Widget hat ein kleines Tutorial, das erklärt, wie die Widgets konfiguriert werden und wie man den Code im Arduino aufsetzen muss. Hier ist das kleine Dashboard, das ich für die LED Streifen erstellt habe.</p>
       <div class="img-container"><img src="../img/blynk_app.png" alt="App"/></div>

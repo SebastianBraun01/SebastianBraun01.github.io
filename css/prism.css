@@ -30,6 +30,20 @@ pre[class*="language-"] {
 
 }
 
+@media(max-width: 810px) {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		font-size: .8rem;
+	}
+}
+
+@media(max-width: 600px) {
+  code[class*="language-"],
+	pre[class*="language-"] {
+		font-size: .5rem;
+	}
+}
+
 /* Code blocks */
 pre[class*="language-"] {
 	padding: 10px 20px;

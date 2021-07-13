@@ -11,7 +11,7 @@ Da ich zum Teil Videos auf der Seite einfügen will, und git selber keine große
 
 # TODO:
 
-- [ ] Webseite Handy- und Tabletkompatibel machen
+- [x] Webseite Handy- und Tabletkompatibel machen
 - [x] Über mich Seite umschreiben
 - [ ] Bessere Animation
 - [ ] Restliche Fotos einfügen
@@ -19,7 +19,7 @@ Da ich zum Teil Videos auf der Seite einfügen will, und git selber keine große
 - [ ] Eigene Domain
 - [ ] kleien Sidebar in den Artikeln und Inhaltsverzeichnis (klickbar)
 - [ ] Github Readmes aller Repositories fertigstellen
-- [x] Irgendwie große Videos fetchen
+- [ ] Irgendwie große Videos fetchen
 - [x] Script basierte Navbar
 - [x] Artikel mit Markdown + automatischer converter
 
