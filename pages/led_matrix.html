@@ -21,6 +21,9 @@
 
     <script defer src="../ts/out/navigation.js"></script>
   </nav>
+  <nav id="mobile-nav">
+    <div class="nav-link" id="mobile-dropdown">+Menu</div>
+  </nav>
   
 
   <!-- Hauptseite -->
@@ -43,7 +46,7 @@
       <br>
       <p>Der Arduino sollte also die Messpunkte mit dem integrierten AD Wandler aufnehmen, diese mit dem FFT Algorythmus verarbeiten und das Ergebnis auf der Matrix ausgeben. Dafür habe ich einen kleinen Prototypen gebaut. Dieser hat auch perfekt funktioniert.</p>
       <br>
-      <video src="https://github.com/SebastianBraun01/SebastianBraun01.github.io/raw/master/img/uv_prototyp.mp4" width="600" controls muted preload></video>
+      <video src="" width="600" controls muted preload></video>
       <br>
       <p>Diese Herangehensweise hat nur einen Haken. Je größer die Matrix, desto langsamer wird die Wiederholrate der Anzeige, weil die Berechnungen und das Ansteuern der Matrix Zeit brauchen und nicht parallel ablaufen können. Mit diesem kleinen Prototypen ist das noch kein Problem, aber wenn ich die große Matrix mit dieser Steuerung betreibe, habe ich nur noch eine Diashow.</p>
       <h3>Matrix</h3>
@@ -106,8 +109,7 @@
       <p>Eine Hardwarebasierte FFT Operation zu entwerfen ist eine große und sehr komplizierte Aufgabe. Um mir die Arbeit zu erleichtern habe ich nach einem vorhandenen FFT Kern gesucht.</p>
       <br>
       <p>Unten verlinkt ist der Open Source FFT Kern von Gissquist. Er stellt einen FFT Kern Generator, auf Github, zu Verfügung, der sich über Kommandozeilenparameter anpassen lässt. Auf seiner Webseite ist der Aufbau und die Funktionsweise des Kerns exellent beschrieben und ich bin froh, dass ich das Projekt gefunden habe.</p>
-      <pre><code class="language-command">
-$ ./fftgen -h
+      <pre><code class="language-command line-numbers">$ ./fftgen -h
   USAGE:    fftgen [-f &lt;size&gt;] [-d dir] [-c cbits] [-n nbits] [-m mxbits] [-s]
     -1  Build a normal FFT, running at one clock per complex sample, or
       (for a real FFT) at one clock per two real input samples.
@@ -148,8 +150,7 @@ $ ./fftgen -h
     -S  Include the final bit reversal stage (default).
     -x &lt;xtrabits&gt;   Use this many extra bits internally, before any final
       rounding or truncation of the answer to the final number of
-      bits.  The default is to use 0 extra bits internally.
-      </code></pre>
+      bits.  The default is to use 0 extra bits internally.</code></pre>
       <p>Neben den optimalen Parametern für mein Projekt, habe ich noch einen Wrapper um den Kern herum entworfen. Der Kern ist als Pipeline konfiguriert mit nur minimalen Steuersignalen. Damit ich ein gewisses Maß an Flowcontroll mit dem Kern habe, möchte ich ihn in einer Burst Konfiguration benutzen.</p>
       <br>
       <p>Der Kern erwartet einen kontinuierlichen Strom von Datensamples und gibt die Berechneten Punkte kontinuierlich aus. Es gibt nur ein Kontroll-Signal, mit dem die Berechnungen unterbrochen werden können. Für die Koordination mit den LED Treibern brauche ich Signale, die Anfang und Ende des Blocks aus 512 Samplen markieren.</p>

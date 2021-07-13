@@ -15,7 +15,7 @@ main {
 }
 
 
-/* ----- Projektkarten ----- */
+/* Projektkarten ================================================================================== */
 #Projektkarten {
   padding: 100px 0;
   display: grid;
@@ -54,7 +54,7 @@ main {
 }
 
 
-/* ----- Media Quaries ----- */
+/* Media Quaries ================================================================================== */
 @media(max-width: 780px) {
   main {
     margin-top: 0;

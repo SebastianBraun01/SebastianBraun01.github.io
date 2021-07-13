@@ -21,7 +21,10 @@
 
     <script defer src="../ts/out/navigation.js"></script>
   </nav>
-  
+  <nav id="mobile-nav">
+    <div class="nav-link" id="mobile-dropdown">+Menu</div>
+  </nav>
+
 
   <!-- Hauptseite -->
   <main>
@@ -40,22 +43,22 @@
       <p>Für die LEDs verwende ich WS2812B RGB LEDs, auch bekannt als Neopixel. Anders als herkömmliche Spannungsgesteuerte LEDs werden diese über einen 24-Bit Farbcode eingestellt. Somit kann man die Farbe jeder einzelnen LED einstellen und zeitgesteuerte Effekte auf dem Streifen abspielen.</p>
       <br>
       <p>Jede LED hat 4 Anschlüsse: <b>5V</b>, <b>GND</b>, <b>DATA-IN</b> und <b>DATA-OUT</b>. In einem Streifen werden die LEDs kaskadiert, indem man den Datenausgang der vorigen LED mit dem Dateneingang der nächsten verbindet. Ist der Datenpuffer einer LED voll und es werden mehr Daten übertragen, läuft der Puffer in die nächste LED über. Der Streifen verhält sich ähnlich wie ein langes Schieberegister.</p>
-      <div class="img-container"><img src="../img/neopixel_pins.jpg" alt="Neopixel Anschlüsse" width="300"/></div>
+      <div class="img-container"><img src="../img/neopixel_pins.jpg" alt="Neopixel Anschlüsse" style="width: 300px;"/></div>
       <p>Das Senden von Bits geschieht über Taktpulse. Deren Dauer bestimmt ob eine 0 oder 1 gesendet wurde. Sind alle Daten übertragen wird die Datenleitung für eine bestimmte Zeit auf GND gehalten, was für die LEDs heißt, dass die Farbdaten im Puffer angezeigt werden sollen. Die Taktzeigen und Farbcodes können im Datenblatt nachgelesen werden.</p>
-      <iframe src="../img/ws2812b_datasheet.pdf" width="800" height="800">Datenblatt WS2812B</iframe>
+      <iframe src="../img/ws2812b_datasheet.pdf" height="800">Datenblatt WS2812B</iframe>
       <h3>Arduino</h3>
       <p>Für die Steuerung der einzelnen Streifen kommen Arduino Nano 33 IOTs zum Einsatz. Diese haben einen kleinen Formfakter und bringen über den WIFI-NINA Chip eine WLAN und Bluetooth Verbindung mit. Jeder Streifen bekommt eine eigene Steuerung und alle sollen dann untereinander über WLAN vernetzt werden.</p>
       <h3>Schaltung</h3>
       <p>Die Verbindung von den LED Streifen mit den Arduinos ist sehr simpel. Zum Schutz vor zu hohen Strömen wird zwischen Arduino und Dateneingang ein 470Ohm Widerstand gesetzt. Da der Stromverbrauch in den Streifen sehr schnell schwanken kann, ist es ratsam einen relativ großen Kondensator an die Versorgung zu legen.</p>
       <br>
       <p>Die LEDs können bei hoher Helligkeit einen großen Stromverbrauch haben (bis zu 3A bei 5m). Es ist also nicht ratsam die Streifen über den Arduino direkt zu versorgen, weil der Spannungsregler im Arduino nicht für solche Ströme ausgelegt ist. Bei längeren Streifen ist ein externes Netzteil ist nötig.</p>
-      <div class="img-container"><img src="../img/neopixel_schaltung.png" alt="Anschlussdiagramm" width="500"/></div>
-      <div class="img-container"><img src="../img/led_schaltung.png" alt="Schaltplan" width="500"/></div>
-      <div class="img-container"><img src="../img/led_platine.jpg" alt="Platine" width="500"/></div>
+      <div class="img-container"><img src="../img/neopixel_schaltung.png" alt="Anschlussdiagramm"/></div>
+      <div class="img-container"><img src="../img/led_schaltung.png" alt="Schaltplan"/></div>
+      <div class="img-container"><img src="../img/led_platine.jpg" alt="Platine"/></div>
       <h3>Gehäuse</h3>
       <p>Für die Platinen habe ich mit Fusion360 ein Gehäuse konstruiert. Das Gehäuse hat einen Deckel mit einem Einrastverschluss und an den Innenwänden befindet sich ein Clip-System, das die Platine festhält.</p>
       <p>Mit meinem 3D Drucker (Ender 5) habe ich das Gehäuse in PLA gedruckt. Alle STL-Dateien befinden sich auch im Repository.</p>
-      <div class="img-container"><img src="../img/" alt="Gehäuse" width="500"/></div>
+      <div class="img-container"><img src="../img/" alt="Gehäuse"/></div>
       <h2>Software</h2>
       <div class="break"></div>
       <h3>PlatformIO</h3>
@@ -162,7 +165,7 @@ void setup() {
       </code></pre>
       <h4>App</h4>
       <p>In der App kann man mit Widgets ein Controll-Dashboard erstellen. Man hat die Auswahl zwischen Buttons, Slider, Anzeigen, Terminals, usw. Jedes Widget hat ein kleines Tutorial, das erklärt, wie die Widgets konfiguriert werden und wie man den Code im Arduino aufsetzen muss. Hier ist das kleine Dashboard, das ich für die LED Streifen erstellt habe.</p>
-      <div class="img-container"><img src="../img/blynk_app.png" alt="App" height="400"/></div>
+      <div class="img-container"><img src="../img/blynk_app.png" alt="App"/></div>
       <h2>Sourcecode</h2>
       <div class="break"></div>
       <p>Alle Quelldateien liegen in meinem Repository. Ich habe die Dokumentation für die Neopixel- und Blynkbibliothek unten verlinkt. Ich freue mich immer über Kommentare und Verbesserungsvorschläge.</p>

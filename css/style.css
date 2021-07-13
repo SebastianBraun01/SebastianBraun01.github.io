@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
-/* ----- Farben ----- */
+/* Farben ========================================================================================= */
 :root {
   --text_hell: #B6B6B6;
   --text_dunkel: #3B4252;
@@ -12,7 +12,7 @@
 }
 
 
-/* ----- Globale Einstellungen ----- */
+/* Globale Einstellungen ========================================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +25,7 @@ body {
 }
 
 
-/* ----- Navbar ----- */
+/* Navbar ========================================================================================= */
 #haupt-nav {
   background-color: var(--hintergrund_dunkel);
   box-shadow: 5px 5px 8px var(--text_hell);
@@ -86,7 +86,7 @@ body {
 }
 
 
-/* ----- Media Query ----- */
+/* Media Query ==================================================================================== */
 @media(max-width: 780px) {
   #haupt-nav {
     box-shadow: none;

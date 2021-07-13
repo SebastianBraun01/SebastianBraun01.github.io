@@ -21,6 +21,9 @@
 
     <script defer src="../ts/out/navigation.js"></script>
   </nav>
+  <nav id="mobile-nav">
+    <div class="nav-link" id="mobile-dropdown">+Menu</div>
+  </nav>
   
 
   <!-- Hauptseite -->
@@ -34,12 +37,12 @@
       <h2>Einleitung</h2>
       <div class="break"></div>
       <p>Die Nixie-Uhr, ein Klassiker für jeden Elektronik Hobbybastler. Das war so ein Projekt, das ich vor ewigen Zeiten mal angefangen aber nie fertiggestellt habe. Jetzt aber wird es Zeit, dass ich die Uhr endlich mal fertig stelle. Alle Schaltpläne und Programme werden auf GitHub veröffentlicht und das Projekt auf meiner Webseite dokumentiert.</p>
-      <div class="img-container"><img src="../img/IN-8_nixie.jpg" alt="Nixie Röhre" width="300"/></div>
+      <div class="img-container"><img src="../img/IN-8_nixie.jpg" alt="Nixie Röhre" style="width: 300px;"/></div>
       <h2>Hardware</h2>
       <div class="break"></div>
       <h3>Netzteil</h3>
       <p>Die erste Frage ist: wie betreibe ich die Nixie Röhren? Das Modell, das ich verwende hat eine Zündspannung von 180V DC, eine Brennspannung von 150V und einen Anodenstrom von 2mA.</p>
-      <iframe src="../img/IN-8.pdf" width="800" height="800">IN-8 Datenblatt</iframe>
+      <iframe src="../img/IN-8.pdf" height="800">IN-8 Datenblatt</iframe>
       <p>Die erstbeste Möglichkeit wäre, ein Transformator basiertes Netzteil zu verwenden. Der Aufbau eines solchen Netzteil ist sehr simpel, es gibt jedoch einen Nachteil: Die Uhr soll eine Freistehende Platine haben und ein großer Trafo der an der Unterseite hängt, sieht nicht wirklich ansehnlich aus. Dazu kommt noch, dass freiliegende Netzspannung sehr gefählich ist.</p>
       <br>
       <p>Ich habe mich dafür entschieden einen 12V auf 180V DC-DC-Wandler zu entwerfen. Normalerweise werden Schaltnetzteile immer instabiler je größer die Differenz zwischen Eingangs- und Ausgangsspannung ist. Vor Allem wenn große Lasten angeschlossen werden. Durch den geringen Betriebstrom der Nixies sollte das aber kein Problem darstellen.</p>

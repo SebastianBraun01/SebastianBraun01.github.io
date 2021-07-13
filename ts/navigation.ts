@@ -10,10 +10,6 @@ document.getElementById("haupt-nav").insertAdjacentHTML("afterend", `
   <a class="nav-link" href="${path}/nixie_uhr.html">Nixie Uhr</a>
   <a class="nav-link" href="${path}/rustuino.html">Rustuino</a>
 </nav>
-
-<nav id="mobile-nav">
-  <div class="nav-link" id="mobile-dropdown">+Menu</div>
-</nav>
 `);
 
 
